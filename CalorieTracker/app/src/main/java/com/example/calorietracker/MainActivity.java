@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Volley.newRequestQueue(this).add(stringRequest);
+       // Volley.newRequestQueue(this).add(stringRequest); data base
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
