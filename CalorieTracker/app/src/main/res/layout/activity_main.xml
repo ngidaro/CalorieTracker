@@ -26,12 +26,13 @@
         android:padding="16dp"
         android:layout_marginTop="48dp">
 
-        <TextView
-            android:text="Sign In"
+        <Button
+            android:id="@+id/signin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="32dp"/>
+            android:text="Sign In"
+            android:textSize="32dp" />
 
         <EditText
             android:hint="Username"
@@ -60,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#0000FF"/>
+
 
     </LinearLayout>
 
