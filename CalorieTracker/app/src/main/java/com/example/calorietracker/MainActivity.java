@@ -2,7 +2,12 @@ package com.example.calorietracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,6 +22,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
+
+    protected Button signin = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,5 +78,39 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Setting up UI
+
+        setupUI();
+
+
+
     }
+
+    protected void setupUI()
+    {
+
+        signin = (Button) findViewById(R.id.signin);
+        signin.setOnClickListener(onClickListener);
+
+    }
+
+    private void gotoHub(){
+
+        Intent intent = new Intent ( this,mainMenu.class);
+        startActivity(intent);
+
+    }
+
+
+    private Button.OnClickListener onClickListener = new Button.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+            gotoHub();
+
+        }
+    };
+
+
+
 }
