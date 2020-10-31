@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".CreateAccountActivity"
     android:gravity="center"
     android:padding="16dp"
     android:orientation="vertical"
     android:weightSum="3">
 
     <TextView
-        android:text="Calorie Tracker"
+        android:text="Create Account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="48dp"
@@ -26,58 +26,49 @@
         android:padding="16dp"
         android:layout_marginTop="48dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Sign In"
-            android:textSize="32dp" />
 
         <EditText
-            android:id="@+id/log_username"
+            android:id="@+id/ca_username"
             android:hint="Username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="16dp"/>
+
         <EditText
-            android:id="@+id/log_password"
+            android:id="@+id/ca_password"
             android:hint="Password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:inputType="textPassword"/>
 
+        <EditText
+            android:id="@+id/ca_email"
+            android:hint="Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="textPassword"/>
+
         <Button
-            android:id="@+id/log_login"
+            android:id="@+id/ca_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Sign Up"
             android:layout_gravity="center"
             android:background="#f0f0ff"
             android:layout_marginTop="16dp"/>
 
         <TextView
-            android:id="@+id/log_create_account"
-            android:text="Don't have an account?"
+            android:id="@+id/ca_have_account"
+            android:text="Have an Account? Sign In"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#0000FF"
             android:layout_marginTop="16dp"/>
 
-        <TextView
-            android:id="@+id/log_forgot_pass"
-            android:text="Forgot Password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="#0000FF"/>
-
-
     </LinearLayout>
-
-
-
 
 </LinearLayout>
