@@ -7,110 +7,68 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toolbar;
+import android.widget.EditText;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
+
+import api.API;
+import user.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    protected Button signin = null;
+    Button btnLogin;
+    EditText etUsername;
+    EditText etPassword;
 
+    TextView tvCreateAccount;
+    TextView tvForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String url = "http://10.0.0.226:3333/api/";
+        btnLogin = findViewById(R.id.log_login);
+        etUsername = findViewById(R.id.log_username);
+        etPassword = findViewById(R.id.log_password);
+        tvCreateAccount = findViewById(R.id.log_create_account);
+        tvForgotPassword = findViewById(R.id.log_forgot_pass);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    System.out.println(response);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Temporary for dev purposes
+//                User.getUser("ngidaro",
+//                        "123",
+//                        MainActivity.this);
+
+                if(etUsername.getText().toString().equals("") ||
+                   etPassword.getText().toString().equals(""))
+                {
+                    // One or more fields are empty
                 }
-            }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("Something went wrong");
-                error.printStackTrace();
+                else {
+
+                    User.getUser(etUsername.getText().toString(),
+                            etPassword.getText().toString(),
+                            MainActivity.this);
+
+                }
+
+
             }
         });
 
-       // Volley.newRequestQueue(this).add(stringRequest); data base
-
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        System.out.println(response.toString());
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        System.out.println("Something went wrong");
-                    }
-                });
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+        tvCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(JSONArray response) {
-                System.out.println(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("Something went wrong");
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
+                startActivity(intent);
             }
         });
-
-        // Setting up UI
-
-        setupUI();
-
-
-
     }
-
-    protected void setupUI()
-    {
-
-        signin = (Button) findViewById(R.id.signin);
-        signin.setOnClickListener(onClickListener);
-
-    }
-
-    private void gotoHub(){
-
-        Intent intent = new Intent ( this,mainMenu.class);
-        startActivity(intent);
-
-    }
-
-
-    private Button.OnClickListener onClickListener = new Button.OnClickListener(){
-
-        @Override
-        public void onClick(View v) {
-            gotoHub();
-
-        }
-    };
-
-
-
 }
