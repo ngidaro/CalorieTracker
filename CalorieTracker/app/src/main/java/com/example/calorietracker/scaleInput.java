@@ -33,11 +33,6 @@ public class scaleInput extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
 
-            case R.id.addfooditem:
-                startActivity(new Intent(this, scaleInput.class));
-                return true;
-
-
         }
         return super.onOptionsItemSelected(item);
     }
