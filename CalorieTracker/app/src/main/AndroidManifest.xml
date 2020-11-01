@@ -5,6 +5,15 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.camera2" />
+    <uses-feature android:name="android.hardware.camera2.autofocus" />
+
+    <meta-data
+        android:name="com.google.android.gms.vision.DEPENCIES"
+        android:value="barcode" />
 
     <application
         android:allowBackup="true"
@@ -15,11 +24,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
-        <activity android:name=".scaleInput"/>
+        <activity android:name=".BarcodeActivity" />
+        <activity android:name=".scaleInput" />
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".HomeActivity" />
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
