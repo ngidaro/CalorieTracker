@@ -93,9 +93,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                             etPassword.getText().toString(),
                             etEmail.getText().toString(),
                             CreateAccountActivity.this);
-                    // Go to Home page with token
-                    Intent intent = new Intent(CreateAccountActivity.this, HomeActivity.class);
-                    startActivity(intent);
                 }
 
             }

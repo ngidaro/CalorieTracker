@@ -24,6 +24,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".FoodInfoActivity"></activity>
+        <activity android:name=".FoodActivity" />
         <activity android:name=".BarcodeActivity" />
         <activity android:name=".scaleInput" />
         <activity android:name=".CreateAccountActivity" />

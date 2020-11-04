@@ -8,13 +8,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {
 
     TextView tvUsername;
-    ImageView ivBarcode;
+    LinearLayout llBarcodeTab;
+    LinearLayout llFoodTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,16 +23,27 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         tvUsername = findViewById(R.id.ha_username);
+        llBarcodeTab = findViewById(R.id.tbar_barcode);
+        llFoodTab = findViewById(R.id.tbar_food);
+
         String username = getIntent().getStringExtra("username");
 
         tvUsername.setText(username);
 
-        // Getting the Image Viewer, and making it clickable to go to BarcodeActivity
-        ivBarcode = findViewById(R.id.barcode_image);
-        ivBarcode.setOnClickListener(new View.OnClickListener() {
+        // Getting the Linear Layout containing Barcode, and making it clickable to go to BarcodeActivity
+
+        llBarcodeTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToBarcodeActivity();
+            }
+        });
+
+        llFoodTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,FoodActivity.class);
+                startActivity(intent);
             }
         });
 

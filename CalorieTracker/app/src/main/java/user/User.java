@@ -62,10 +62,10 @@ public class User {
                 });
     }
 
-    public static void createUser(String username,
+    public static void createUser(final String username,
                                   String password,
                                   String email,
-                                  Context applicationContext)
+                                  final Context applicationContext)
     {
 
         JSONObject postUser = new JSONObject();
@@ -87,7 +87,9 @@ public class User {
                 new IVolleyRequestCallback() {
                     @Override
                     public void onSuccess(JSONObject result) {
-                        //
+                        Intent intent = new Intent(applicationContext, HomeActivity.class);
+                        intent.putExtra("username", username);
+                        applicationContext.startActivity(intent);
                     }
 
                     @Override
