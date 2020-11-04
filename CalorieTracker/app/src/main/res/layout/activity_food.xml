@@ -51,13 +51,22 @@
         android:layout_height="wrap_content"
         android:padding="8dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fa_search_rv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:scrollbars="vertical"/>
+        android:layout_height="match_parent"
+        android:gravity="bottom">
 
-    <include layout="@layout/tabbar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fa_search_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:scrollbars="vertical"/>
+
+        <include layout="@layout/tabbar" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

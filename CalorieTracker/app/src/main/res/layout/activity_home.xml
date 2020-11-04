@@ -38,7 +38,22 @@
         android:layout_gravity="center"
         android:layout_marginTop="64dp"/>
 
-    <include layout="@layout/tabbar"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ha_diary_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scrollbars="vertical"/>
+
+        <include layout="@layout/tabbar" />
+
+    </RelativeLayout>
+
 
 
 </LinearLayout>

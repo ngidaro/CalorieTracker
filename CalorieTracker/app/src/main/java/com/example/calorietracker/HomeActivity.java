@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
         llFoodTab = findViewById(R.id.tbar_food);
 
         String username = getIntent().getStringExtra("username");
+        final String user_id = getIntent().getStringExtra("_id");
 
         tvUsername.setText(username);
 
@@ -43,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this,FoodActivity.class);
+                intent.putExtra("_id", user_id);
                 startActivity(intent);
             }
         });

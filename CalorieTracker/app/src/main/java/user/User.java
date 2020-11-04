@@ -47,6 +47,7 @@ public class User {
 
                             Intent intent = new Intent(applicationContext, HomeActivity.class);
                             intent.putExtra("username", username);
+                            intent.putExtra("_id", result.getString("_id"));
                             applicationContext.startActivity(intent);
 
                         }

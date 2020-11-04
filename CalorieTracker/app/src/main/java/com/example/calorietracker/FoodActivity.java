@@ -46,6 +46,8 @@ public class FoodActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        final String user_id = getIntent().getStringExtra("_id");
+
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -81,7 +83,7 @@ public class FoodActivity extends AppCompatActivity {
 //                                        System.out.println(result.toString());
                                     JSONArray res = result.getJSONArray("foods");
 
-                                    mAdapter = new RecyclerViewAdapter(res, FoodActivity.this);
+                                    mAdapter = new RecyclerViewAdapter(res, FoodActivity.this, user_id);
                                     recyclerView.setAdapter(mAdapter);
 
                                 }catch (JSONException e){
