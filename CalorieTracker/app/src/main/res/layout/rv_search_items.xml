@@ -22,7 +22,6 @@
 
         <TextView
             android:text="USDA"
-            android:id="@+id/average_grade"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

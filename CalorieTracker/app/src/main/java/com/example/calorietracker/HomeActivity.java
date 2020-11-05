@@ -2,6 +2,8 @@ package com.example.calorietracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,25 +13,42 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import CustomAdapters.RecyclerViewAdapter;
+import CustomAdapters.RecyclerViewAdapterHome;
+import callbacks.IVolleyRequestCallback;
+
 public class HomeActivity extends AppCompatActivity {
 
-    TextView tvUsername;
     LinearLayout llBarcodeTab;
     LinearLayout llFoodTab;
+
+    protected RecyclerView recyclerView;
+    protected RecyclerView.Adapter mAdapter;
+    protected RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        tvUsername = findViewById(R.id.ha_username);
         llBarcodeTab = findViewById(R.id.tbar_barcode);
         llFoodTab = findViewById(R.id.tbar_food);
 
-        String username = getIntent().getStringExtra("username");
         final String user_id = getIntent().getStringExtra("_id");
 
-        tvUsername.setText(username);
+        // Setting the RecyclerView
+        recyclerView = findViewById(R.id.ha_diary_rv);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // Display the foods added by the user in a list
+        getFoodDiary(user_id);
 
         // Getting the Linear Layout containing Barcode, and making it clickable to go to BarcodeActivity
 
@@ -43,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
         llFoodTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this,FoodActivity.class);
+                Intent intent = new Intent(HomeActivity.this, FoodActivity.class);
                 intent.putExtra("_id", user_id);
                 startActivity(intent);
             }
@@ -84,7 +103,50 @@ public class HomeActivity extends AppCompatActivity {
     {
         moveTaskToBack(true);
     }
+
+
+    public void getFoodDiary(final String user_id)
+    {
+
+        JSONObject jsonFood = new JSONObject();
+
+        try
+        {
+            jsonFood.put("user_id", user_id);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        VolleyRequestContainer.request(
+                Request.Method.POST,
+                "/food/getdiary",
+                jsonFood,
+                this,
+                new IVolleyRequestCallback() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        System.out.println(result.toString());
+                        JSONArray jsonArrayFoods = null;
+
+                        try {
+
+                            jsonArrayFoods = result.getJSONArray("foodDiary");
+
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        mAdapter = new RecyclerViewAdapterHome(jsonArrayFoods, HomeActivity.this, user_id);
+                        recyclerView.setAdapter(mAdapter);
+
+                    }
+
+                    @Override
+                    public void onFailure(String result) {
+                        // Failed
+                    }
+                });
+    }
+
 }
-
-
-

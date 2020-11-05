@@ -131,6 +131,7 @@ public class FoodInfoActivity extends AppCompatActivity {
                         jsonFood.put("user_id", user_id);
                         jsonFood.put("amount", dAmount);
                         jsonFood.put("servingsize", dServingSize);
+                        jsonFood.put("servingunits", jsonFoodObj.getString("servingSizeUnit"));
                         jsonFood.put("description", jsonFoodObj.getString("description"));
                         jsonFood.put("brandowner", jsonFoodObj.getString("brandOwner"));
                         jsonFood.put("energy", (dEnergy*dAmount*dServingSize/Double.parseDouble(jsonFoodObj.getString("servingSize")))); // Nutrient Id for Energy is 1008 -> see nutrient.csv
@@ -152,6 +153,7 @@ public class FoodInfoActivity extends AppCompatActivity {
                                 public void onSuccess(JSONObject result) {
                                     System.out.println(result.toString());
                                     Intent intent = new Intent(FoodInfoActivity.this, HomeActivity.class);
+                                    intent.putExtra("_id",user_id);
                                     startActivity(intent);
                                 }
 
