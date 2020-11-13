@@ -2,38 +2,55 @@ package com.example.calorietracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+
+import com.android.volley.Request;
+import com.example.calorietracker.navigator.ActivityNavigator;
+import com.example.calorietracker.volley.VolleyRequestContainer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import CustomAdapters.RecyclerViewAdapterHome;
+import callbacks.IVolleyRequestCallback;
 
 public class HomeActivity extends AppCompatActivity {
 
-    TextView tvUsername;
-    ImageView ivBarcode;
+    protected RecyclerView recyclerView;
+    protected RecyclerView.Adapter mAdapter;
+    protected RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        tvUsername = findViewById(R.id.ha_username);
-        String username = getIntent().getStringExtra("username");
+        final String user_id = getIntent().getStringExtra("_id");
 
-        tvUsername.setText(username);
+        // Code to Switch Activities
 
-        // Getting the Image Viewer, and making it clickable to go to BarcodeActivity
-        ivBarcode = findViewById(R.id.barcode_image);
-        ivBarcode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToBarcodeActivity();
-            }
-        });
+        LinearLayout llHomeTab    = findViewById(R.id.tbar_home);
+        LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
+        LinearLayout llBarcodeTab = findViewById(R.id.tbar_barcode);
+        LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
+
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab);
+
+        // Setting the RecyclerView
+        recyclerView = findViewById(R.id.ha_diary_rv);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // Display the foods added by the user in a list
+        getFoodDiary(user_id);
 
     }
 
@@ -70,7 +87,49 @@ public class HomeActivity extends AppCompatActivity {
     {
         moveTaskToBack(true);
     }
+
+
+    public void getFoodDiary(final String user_id)
+    {
+
+        JSONObject jsonFood = new JSONObject();
+
+        try
+        {
+            jsonFood.put("user_id", user_id);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        VolleyRequestContainer.request(
+                Request.Method.POST,
+                "/food/getdiary",
+                jsonFood,
+                this,
+                new IVolleyRequestCallback() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        System.out.println(result.toString());
+                        JSONArray jsonArrayFoods = null;
+
+                        try {
+
+                            jsonArrayFoods = result.getJSONArray("foodDiary");
+
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        mAdapter = new RecyclerViewAdapterHome(jsonArrayFoods, HomeActivity.this, user_id);
+                        recyclerView.setAdapter(mAdapter);
+
+                    }
+
+                    @Override
+                    public void onFailure(String result) {
+                        // Failed
+                    }
+                });
+    }
 }
-
-
-

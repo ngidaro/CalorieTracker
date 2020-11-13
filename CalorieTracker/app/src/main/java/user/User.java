@@ -5,15 +5,10 @@ import android.content.Intent;
 
 import com.android.volley.Request;
 import com.example.calorietracker.HomeActivity;
-import com.example.calorietracker.MainActivity;
-import com.example.calorietracker.VolleyRequestContainer;
+import com.example.calorietracker.volley.VolleyRequestContainer;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
-import java.util.Map;
 
 import callbacks.IVolleyRequestCallback;
 
@@ -47,6 +42,7 @@ public class User {
 
                             Intent intent = new Intent(applicationContext, HomeActivity.class);
                             intent.putExtra("username", username);
+                            intent.putExtra("_id", result.getString("_id"));
                             applicationContext.startActivity(intent);
 
                         }
@@ -62,10 +58,10 @@ public class User {
                 });
     }
 
-    public static void createUser(String username,
+    public static void createUser(final String username,
                                   String password,
                                   String email,
-                                  Context applicationContext)
+                                  final Context applicationContext)
     {
 
         JSONObject postUser = new JSONObject();
@@ -87,7 +83,9 @@ public class User {
                 new IVolleyRequestCallback() {
                     @Override
                     public void onSuccess(JSONObject result) {
-                        //
+                        Intent intent = new Intent(applicationContext, HomeActivity.class);
+                        intent.putExtra("username", username);
+                        applicationContext.startActivity(intent);
                     }
 
                     @Override
