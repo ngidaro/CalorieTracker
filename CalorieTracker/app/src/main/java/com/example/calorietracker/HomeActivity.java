@@ -9,24 +9,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.example.calorietracker.navigator.ActivityNavigator;
+import com.example.calorietracker.volley.VolleyRequestContainer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import CustomAdapters.RecyclerViewAdapter;
 import CustomAdapters.RecyclerViewAdapterHome;
 import callbacks.IVolleyRequestCallback;
 
 public class HomeActivity extends AppCompatActivity {
-
-    LinearLayout llBarcodeTab;
-    LinearLayout llFoodTab;
 
     protected RecyclerView recyclerView;
     protected RecyclerView.Adapter mAdapter;
@@ -37,10 +33,16 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        llBarcodeTab = findViewById(R.id.tbar_barcode);
-        llFoodTab = findViewById(R.id.tbar_food);
-
         final String user_id = getIntent().getStringExtra("_id");
+
+        // Code to Switch Activities
+
+        LinearLayout llHomeTab    = findViewById(R.id.tbar_home);
+        LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
+        LinearLayout llBarcodeTab = findViewById(R.id.tbar_barcode);
+        LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
+
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab);
 
         // Setting the RecyclerView
         recyclerView = findViewById(R.id.ha_diary_rv);
@@ -49,24 +51,6 @@ public class HomeActivity extends AppCompatActivity {
 
         // Display the foods added by the user in a list
         getFoodDiary(user_id);
-
-        // Getting the Linear Layout containing Barcode, and making it clickable to go to BarcodeActivity
-
-        llBarcodeTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToBarcodeActivity();
-            }
-        });
-
-        llFoodTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, FoodActivity.class);
-                intent.putExtra("_id", user_id);
-                startActivity(intent);
-            }
-        });
 
     }
 
@@ -149,4 +133,50 @@ public class HomeActivity extends AppCompatActivity {
                 });
     }
 
+//    void changeActivity(final Context applicationContext, final String user_id){
+//
+//        llHomeTab    = findViewById(R.id.tbar_home);
+//        llFoodTab    = findViewById(R.id.tbar_food);
+//        llBarcodeTab = findViewById(R.id.tbar_barcode);
+//        llRecipeTab  = findViewById(R.id.tbar_recipe);
+//
+//        llHomeTab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(applicationContext, HomeActivity.class);
+//                intent.putExtra("_id", user_id);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        llFoodTab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(applicationContext, FoodActivity.class);
+//                intent.putExtra("_id", user_id);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        llBarcodeTab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(applicationContext, BarcodeActivity.class);
+//                intent.putExtra("_id", user_id);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        llRecipeTab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(applicationContext, RecipeActivity.class);
+//                intent.putExtra("_id", user_id);
+//                startActivity(intent);
+//            }
+//        });
+//    }
 }

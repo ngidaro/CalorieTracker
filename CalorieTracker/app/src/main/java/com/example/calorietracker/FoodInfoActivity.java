@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.google.gson.JsonObject;
+import com.example.calorietracker.volley.VolleyRequestContainer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +21,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import CustomAdapters.RecyclerViewAdapter;
 import callbacks.IVolleyRequestCallback;
 
 public class FoodInfoActivity extends AppCompatActivity {

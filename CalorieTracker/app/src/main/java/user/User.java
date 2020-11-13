@@ -5,15 +5,10 @@ import android.content.Intent;
 
 import com.android.volley.Request;
 import com.example.calorietracker.HomeActivity;
-import com.example.calorietracker.MainActivity;
-import com.example.calorietracker.VolleyRequestContainer;
+import com.example.calorietracker.volley.VolleyRequestContainer;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
-import java.util.Map;
 
 import callbacks.IVolleyRequestCallback;
 

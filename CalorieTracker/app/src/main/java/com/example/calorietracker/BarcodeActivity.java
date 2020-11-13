@@ -13,8 +13,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.calorietracker.navigator.ActivityNavigator;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -41,6 +43,17 @@ public class BarcodeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode);
+
+        final String user_id = getIntent().getStringExtra("_id");
+
+        // Code to Switch Activities
+
+        LinearLayout llHomeTab    = findViewById(R.id.tbar_home);
+        LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
+        LinearLayout llBarcodeTab = findViewById(R.id.tbar_barcode);
+        LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
+
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab);
 
         // The view of the camera and the text that shows what the barcode reads
        surfaceView = (SurfaceView) findViewById(R.id.barcode_view);

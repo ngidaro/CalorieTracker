@@ -1,7 +1,7 @@
 package api;
 
 import com.android.volley.Request;
-import com.example.calorietracker.VolleyRequestContainer;
+import com.example.calorietracker.volley.VolleyRequestContainer;
 
 import org.json.JSONObject;
 

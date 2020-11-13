@@ -8,18 +8,17 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.example.calorietracker.navigator.ActivityNavigator;
+import com.example.calorietracker.volley.VolleyRequestContainer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 import CustomAdapters.RecyclerViewAdapter;
 import callbacks.IVolleyRequestCallback;
@@ -38,6 +37,17 @@ public class FoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
 
+        final String user_id = getIntent().getStringExtra("_id");
+
+        // Code to Switch Activities
+
+        LinearLayout llHomeTab    = findViewById(R.id.tbar_home);
+        LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
+        LinearLayout llBarcodeTab = findViewById(R.id.tbar_barcode);
+        LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
+
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab);
+
         etSearch = findViewById(R.id.fa_search);
         tvRecentResult = findViewById(R.id.fa_rec_res);
 
@@ -45,8 +55,6 @@ public class FoodActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.fa_search_rv);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        final String user_id = getIntent().getStringExtra("_id");
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
