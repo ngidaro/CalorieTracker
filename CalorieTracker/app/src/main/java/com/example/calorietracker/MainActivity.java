@@ -42,22 +42,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Temporary for dev purposes
-                User.getUser("ngidaro",
-                        "123",
-                        MainActivity.this);
+//                User.getUser("ngidaro",
+//                        "123",
+//                        MainActivity.this);
 
-//                if(etUsername.getText().toString().equals("") ||
-//                   etPassword.getText().toString().equals(""))
-//                {
-//                    // One or more fields are empty
-//                }
-//                else {
-//
-//                    User.getUser(etUsername.getText().toString(),
-//                            etPassword.getText().toString(),
-//                            MainActivity.this);
-//
-//                }
+                if(etUsername.getText().toString().equals("") ||
+                   etPassword.getText().toString().equals(""))
+                {
+                    // One or more fields are empty
+                }
+                else {
+
+                    User.getUser(etUsername.getText().toString(),
+                            etPassword.getText().toString(),
+                            MainActivity.this);
+
+                }
 
 
             }

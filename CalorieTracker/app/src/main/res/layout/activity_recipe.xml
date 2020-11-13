@@ -4,7 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecipeActivity">
+    tools:context=".RecipeActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/ra_add_recipe"
+            android:text="Add Recipe"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:background="@drawable/drawable_add_recipe_bg" />
+
+        <TextView
+            android:id="@+id/ra_your_recipe"
+            android:text="Your Recipes"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:layout_marginTop="32dp"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:background="@drawable/drawable_your_recipe_bg"/>
+
+    </LinearLayout>
+
 
     <include layout="@layout/tabbar" />
 

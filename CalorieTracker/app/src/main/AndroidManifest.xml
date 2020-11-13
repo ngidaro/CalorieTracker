@@ -27,7 +27,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".RecipeActivity"></activity>
+        <activity android:name=".YourRecipeActivity"></activity>
+        <activity android:name=".AddRecipeActivity" />
+        <activity android:name=".RecipeActivity" />
         <activity android:name=".FoodInfoActivity" />
         <activity android:name=".FoodActivity" />
         <activity android:name=".BarcodeActivity" />
