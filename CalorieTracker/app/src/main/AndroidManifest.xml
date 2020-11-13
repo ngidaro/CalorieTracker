@@ -16,7 +16,7 @@
     <uses-feature android:name="android.hardware.camera2.autofocus" />
 
     <meta-data
-        android:name="com.google.android.gms.vision.DENCIES"
+        android:name="com.google.android.gms.vision.DEPENCIES"
         android:value="barcode" />
 
     <application
