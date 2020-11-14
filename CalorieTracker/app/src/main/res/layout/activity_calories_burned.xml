@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FoodActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/caldef_title"
+        android:text="@string/caloric_deficit_input"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/caldef_note"
+        android:text="@string/enter_you_current_caloric_deficit_to_be_added_to_total_daily_caloric_intake"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/cal_burned"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:hint="@string/calories_burned"
+            android:inputType="number"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:autofillHints="calories_burned" />
+
+
+        <TextView
+            android:id="@+id/calunit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:text="@string/calorie"
+            android:layout_marginStart="20dp" />
+
+        <Button
+            android:id="@+id/caldef_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:background="#f0f0ff"
+            android:text="@string/confirm"
+            android:layout_marginStart="40dp" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+
+
+        <include layout="@layout/tabbar" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
