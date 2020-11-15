@@ -9,7 +9,7 @@
     android:weightSum="100">
 
     <ImageView
-        android:id="@+id/aci_image"
+        android:id="@+id/ri_image"
         android:layout_width="200dp"
         android:layout_height="200dp"/>
 
@@ -20,7 +20,7 @@
         android:layout_weight="50">
 
         <TextView
-            android:id="@+id/aci_timer"
+            android:id="@+id/ri_timer"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
@@ -30,25 +30,18 @@
             android:layout_marginLeft="40dp"
             android:textColor="#000"
             android:textSize="20dp"
-            app:layout_constraintStart_toStartOf="@id/aci_image"
-            app:layout_constraintTop_toBottomOf="@id/aci_image" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="40dp"
-            android:text="Start Timer" />
+            app:layout_constraintStart_toStartOf="@id/ri_image"
+            app:layout_constraintTop_toBottomOf="@id/ri_image" />
 
         <TextView
-            android:id="@+id/aci_instruction"
+            android:id="@+id/ri_recipe_name"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="Instruction"
+            android:layout_height="150dp"
+            android:text="Recipe Name"
             android:textColor="#000000"
             android:textSize="16dp"
             android:gravity="center"
-            android:layout_below="@id/aci_timer"/>
+            android:layout_below="@id/ri_timer"/>
 
 
     </LinearLayout>

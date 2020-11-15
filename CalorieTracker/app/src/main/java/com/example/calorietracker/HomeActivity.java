@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -36,6 +37,9 @@ public class HomeActivity extends AppCompatActivity {
     protected RecyclerView.LayoutManager layoutManager;
 
     protected TextView calorieAmount;
+    protected TextView calorieLimitView;
+
+    protected double calorieLimit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,68 @@ public class HomeActivity extends AppCompatActivity {
 
         // Display the foods added by the user in a list
         getFoodDiary(user_id);
+
+        // Set Daily Calorie Limit
+        String gender;
+        String activityLevel;
+        double weight;
+        double height;
+        double BMR=0;
+        double weightLossWeekly;
+        int age;
+        calorieLimit=0;
+
+        gender = "Male";
+
+        activityLevel = "hard exercise";
+
+        age = 21;
+
+        weight = 168;
+
+        height = 70;
+
+        weightLossWeekly = 1.5;
+
+        // Formula for calorie limit obtained from: http://www.checkyourhealth.org/eat-healthy/cal_calculator.php
+
+        // Determining calorie limit for male
+        if (gender.equals("Male"))
+        {
+            BMR = 66 + (6.3*weight) + 12.9*height - 6.8*age;
+
+            if (activityLevel.equals("little or no exercise"))
+                calorieLimit = BMR*1.2-weightLossWeekly*500;
+            else if (activityLevel.equals("light exercise"))
+                calorieLimit = BMR*1.375-weightLossWeekly*500;
+            else if (activityLevel.equals("moderate exercise"))
+                calorieLimit = BMR*1.55-weightLossWeekly*500;
+            else if (activityLevel.equals("hard exercise"))
+                calorieLimit = BMR*1.725-weightLossWeekly*500;
+            else if (activityLevel.equals("very hard exercise"))
+                calorieLimit = BMR*1.9-weightLossWeekly*500;
+        }
+
+        // Determining calorie limit for female
+        if (gender.equals("Female"))
+        {
+            BMR = 665 + (4.3*weight) + 4.7*height - 4.7*age;
+
+            if (activityLevel.equals("little or no exercise"))
+                calorieLimit = BMR*1.2-weightLossWeekly*500;
+            if (activityLevel.equals("light exercise"))
+                calorieLimit = BMR*1.375-weightLossWeekly*500;
+            if (activityLevel.equals("moderate exercise"))
+                calorieLimit = BMR*1.55-weightLossWeekly*500;
+            if (activityLevel.equals("hard exercise"))
+                calorieLimit = BMR*1.725-weightLossWeekly*500;
+            if (activityLevel.equals("very hard exercise"))
+                calorieLimit = BMR*1.9-weightLossWeekly*500;
+        }
+
+        calorieLimitView = findViewById(R.id.ha_limit);
+        calorieLimitView.setText(""+calorieLimit);
+
 
         // Buton to go to scale input
         llFloatingButton.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +222,11 @@ public class HomeActivity extends AppCompatActivity {
 
                         calorieAmount = findViewById(R.id.ha_amount);
                         calorieAmount.setText(""+calorie);
+                        if (calorie>calorieLimit)
+                        {
+                            calorieAmount.setTextColor(Color.RED);
+                        }
+
 
 
 
