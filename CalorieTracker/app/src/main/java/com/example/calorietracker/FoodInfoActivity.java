@@ -132,7 +132,6 @@ public class FoodInfoActivity extends AppCompatActivity {
                         jsonFood.put("description", jsonFoodObj.getString("description"));
                         jsonFood.put("brandowner", jsonFoodObj.getString("brandOwner"));
                         jsonFood.put("energy", (dEnergy*dAmount*dServingSize/Double.parseDouble(jsonFoodObj.getString("servingSize")))); // Nutrient Id for Energy is 1008 -> see nutrient.csv
-
                     }
                     catch (JSONException e){
                         e.printStackTrace();

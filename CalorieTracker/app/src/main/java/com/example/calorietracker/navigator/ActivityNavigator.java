@@ -11,6 +11,7 @@ import com.example.calorietracker.FoodActivity;
 import com.example.calorietracker.HomeActivity;
 import com.example.calorietracker.R;
 import com.example.calorietracker.RecipeActivity;
+import com.example.calorietracker.scaleInput;
 
 public class ActivityNavigator extends Activity {
 

@@ -36,6 +36,7 @@
 
             <EditText
                 android:id="@+id/fa_search"
+                android:textColor="#000010"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Search all foods..."/>
@@ -47,6 +48,7 @@
     <TextView
         android:id="@+id/fa_rec_res"
         android:text="Recent"
+        android:textColor="#000010"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"/>

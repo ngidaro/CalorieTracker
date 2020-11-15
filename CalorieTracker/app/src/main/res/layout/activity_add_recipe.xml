@@ -23,6 +23,15 @@
         android:background="@drawable/border_round_corners_8dp"
         android:layout_marginTop="16dp"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,8 +40,8 @@
         android:layout_marginTop="8dp"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="380dp"
+        android:layout_height="501dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/border_round_corners_8dp"
         android:orientation="vertical">
@@ -44,26 +53,54 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/add_green"
                 android:layout_gravity="center"
                 android:padding="8dp"
                 android:paddingEnd="0dp"
-                android:paddingRight="0dp" />
+                android:paddingRight="0dp"
+                app:srcCompat="@drawable/add_green" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Ingredients"
-            android:textSize="16dp"
-            android:padding="8dp"
-            android:paddingLeft="0dp"
-            android:textColor="#008000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:paddingLeft="0dp"
+                android:text="Add Ingredients"
+                android:textColor="#008000"
+                android:textSize="16dp" />
 
         </LinearLayout>
 
+    </LinearLayout>
 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+
+    <Button
+        android:id="@+id/ar_step_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="140dp"
+        android:background="#f0f0ff"
+        android:text="Add Steps" />
+
+    <Button
+        android:id="@+id/ar_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="#f0f0ff"
+        android:text="Save Recipe" />
 
     </LinearLayout>
+    </LinearLayout>
+
+    </ScrollView>
+
 
 </LinearLayout>
