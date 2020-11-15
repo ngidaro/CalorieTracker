@@ -22,6 +22,7 @@ public class RecyclerViewAdapterHome extends RecyclerView.Adapter<RecyclerViewAd
     private JSONArray mData;
     private Context applicationContext;
     private String user_id;
+    private double calories;
 
     public static class customViewHolder extends RecyclerView.ViewHolder {
 
@@ -66,6 +67,7 @@ public class RecyclerViewAdapterHome extends RecyclerView.Adapter<RecyclerViewAd
         double dFoodQuantity = 0;
         String sServingUnits = "";
         double dCalories = 0;
+        calories = 0;
 
         try {
             foodObj = (JSONObject) mData.get(position);
@@ -95,6 +97,7 @@ public class RecyclerViewAdapterHome extends RecyclerView.Adapter<RecyclerViewAd
         holder.tvFoodName.setText(sFoodInfo);
         holder.tvFoodServing.setText((int) dFoodQuantity + " " + sServingUnits);
         holder.tvFoodCalorie.setText((int) dCalories + " kcal");
+        calories += dCalories;
 
         final JSONObject finalFoodObj = foodObj;
         holder.tvFoodName.setOnClickListener(new View.OnClickListener() {
@@ -119,5 +122,7 @@ public class RecyclerViewAdapterHome extends RecyclerView.Adapter<RecyclerViewAd
     public int getItemCount() {
         return mData.length();
     }
+
+    public double getCalories() {return calories; }
 
 }

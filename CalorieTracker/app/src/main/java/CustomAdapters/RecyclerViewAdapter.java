@@ -23,6 +23,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context applicationContext;
     private String user_id;
 
+
     public static class customViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvFoodInfo;

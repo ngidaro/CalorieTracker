@@ -19,7 +19,7 @@ import callbacks.IVolleyRequestCallback;
 
 public class VolleyRequestContainer {
 
-    private static String CALORIE_TRACKER_SERVER = "http://10.0.0.226:3333";
+    private static String CALORIE_TRACKER_SERVER = "http://192.168.2.55.:3333";
 
     public static void request(int method,
                                   String SERVER_URL,
