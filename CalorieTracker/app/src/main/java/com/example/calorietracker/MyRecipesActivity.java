@@ -5,30 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class YourRecipeActivity extends AppCompatActivity {
+public class MyRecipesActivity extends AppCompatActivity {
 
-    protected Button stepButton;
-
-    protected TextView recipeName;
-    protected TextView cookingTime;
-    protected TextView ingredients;
+    protected ListView myRecipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_recipe);
+        setContentView(R.layout.activity_your_recipe);
 
-        recipeName = findViewById(R.id.yra_recipe_name);
-        cookingTime = findViewById(R.id.yra_cooking_time);
-        ingredients = findViewById(R.id.yra_recipe_ingredients);
+        myRecipes = findViewById(R.id.recipes);
+        loadRecipes();
+    }
+
+    public void loadRecipes() {
+
 
         String recipe_name = "Fruit Salad";
         ArrayList<String> recipeIngredients = new ArrayList<String>();
@@ -37,9 +34,7 @@ public class YourRecipeActivity extends AppCompatActivity {
         recipeIngredients.add("Banana");
         recipeIngredients.add("Mango");
 
-
-
-        final Recipe recipe = new Recipe(recipe_name,recipeIngredients);
+        final Recipe recipe = new Recipe(recipe_name, recipeIngredients);
 
         String instruction1 = "Cut Apple";
         ArrayList<String> step1Ingredients = new ArrayList<String>();
@@ -73,31 +68,23 @@ public class YourRecipeActivity extends AppCompatActivity {
 
         recipe.setRecipeSteps(steps);
 
-        recipeName.setText(recipe.getRecipeName());
-        cookingTime.setText(recipe.getRecipeTime());
+        ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+        recipes.add(recipe);
 
-        int size = recipeIngredients.size();
 
-        for (int i=0; i<size;i++)
-            ingredients.append("\n"+recipeIngredients.get(i));
+        RecipeAdapter adapter = new RecipeAdapter(this, R.layout.recipe_info, recipes);
+        myRecipes.setAdapter(adapter);
 
-        stepButton = findViewById(R.id.yra_view_steps);
+        myRecipes.setClickable(true);
 
-        stepButton.setOnClickListener(new View.OnClickListener() {
+        myRecipes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
-            public void onClick(View v) {
-                goToViewRecipeActivity(recipe.getRecipeName());
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MyRecipesActivity.this,YourRecipeActivity.class);
+                startActivity(intent);
             }
+
         });
-    }
-
-    public  void goToViewRecipeActivity(String recipeName)
-    {
-        Intent intent = new Intent(this,ViewRecipeActivity.class);
-
-        Bundle bundle = new Bundle();
-        bundle.putString("KEY",recipeName);
-        intent.putExtras(bundle);
-        startActivity(intent);
     }
 }

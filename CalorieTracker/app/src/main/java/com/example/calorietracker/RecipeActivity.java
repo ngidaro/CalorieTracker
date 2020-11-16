@@ -46,7 +46,7 @@ public class RecipeActivity extends AppCompatActivity {
         tvYourRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecipeActivity.this, YourRecipeActivity.class);
+                Intent intent = new Intent(RecipeActivity.this, MyRecipesActivity.class);
                 intent.putExtra("_id", user_id);
                 startActivity(intent);
             }
