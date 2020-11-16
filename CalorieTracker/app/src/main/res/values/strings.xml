@@ -7,4 +7,6 @@
     <string name="calories_burned">calories_burned</string>
     <string name="calorie">calorie</string>
     <string name="confirm">confirm</string>
+    <string name="setting_item_1">Setting item 1</string>
+    <string name="Settings">Settings</string>
 </resources>

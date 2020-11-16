@@ -28,6 +28,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name=".ViewRecipeActivity"></activity>
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".YourRecipeActivity" />
         <activity android:name=".AddRecipeActivity" />
         <activity android:name=".RecipeActivity" />
