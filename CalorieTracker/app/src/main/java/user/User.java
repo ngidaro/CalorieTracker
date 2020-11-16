@@ -83,9 +83,22 @@ public class User {
                 new IVolleyRequestCallback() {
                     @Override
                     public void onSuccess(JSONObject result) {
+
+                        System.out.println(result);
+                        String user_id = null;
+
+                        try{
+                            user_id = result.getString("_id");
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                        }
+
                         Intent intent = new Intent(applicationContext, HomeActivity.class);
                         intent.putExtra("username", username);
+                        intent.putExtra( "_id", user_id);
                         applicationContext.startActivity(intent);
+
                     }
 
                     @Override

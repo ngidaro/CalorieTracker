@@ -8,97 +8,85 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Recipe"
-        android:textStyle="bold"
-        android:textSize="28dp"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:hint="Recipe Name (Required)"
-        android:background="@drawable/border_round_corners_8dp"
-        android:layout_marginTop="16dp"/>
-
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ingredients"
-        android:textSize="18dp"
-        android:layout_marginTop="8dp"/>
-
-    <LinearLayout
-        android:layout_width="380dp"
-        android:layout_height="501dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/border_round_corners_8dp"
-        android:orientation="vertical">
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="8dp"
-                android:paddingEnd="0dp"
-                android:paddingRight="0dp"
-                app:srcCompat="@drawable/add_green" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:paddingLeft="0dp"
-                android:text="Add Ingredients"
-                android:textColor="#008000"
-                android:textSize="16dp" />
+                android:text="Add Recipe"
+                android:textStyle="bold"
+                android:textSize="28dp"/>
+
+            <EditText
+                android:id="@+id/ar_recipe_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:hint="Recipe Name (Required)"
+                android:background="@drawable/border_round_corners_8dp"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingredients"
+                android:textSize="18dp"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="380dp"
+                android:layout_height="501dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/border_round_corners_8dp"
+                android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ar_add_ingredient"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="8dp"
+                            android:paddingEnd="0dp"
+                            android:paddingRight="0dp"
+                            app:srcCompat="@drawable/add_green" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp"
+                            android:paddingLeft="0dp"
+                            android:text="Add Ingredients"
+                            android:textColor="#008000"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/ar_save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#f0f0ff"
+                android:text="Save Recipe"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="right"/>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp">
-
-    <Button
-        android:id="@+id/ar_step_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="140dp"
-        android:background="#f0f0ff"
-        android:text="Add Steps" />
-
-    <Button
-        android:id="@+id/ar_save_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:background="#f0f0ff"
-        android:text="Save Recipe" />
-
-    </LinearLayout>
-    </LinearLayout>
 
     </ScrollView>
 

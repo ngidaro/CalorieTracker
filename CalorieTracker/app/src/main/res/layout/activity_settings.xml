@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/u_settings"
         android:text="@string/Settings"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:textSize="32sp"
         android:background="@color/colorPrimary"

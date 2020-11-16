@@ -21,6 +21,7 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
 
@@ -52,8 +53,9 @@ public class BarcodeActivity extends AppCompatActivity {
         LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
         LinearLayout llBarcodeTab = findViewById(R.id.tbar_barcode);
         LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
+        FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
 
-        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab);
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab, llFloatingButton);
 
         // The view of the camera and the text that shows what the barcode reads
        surfaceView = (SurfaceView) findViewById(R.id.barcode_view);

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.example.calorietracker.navigator.ActivityNavigator;
 import com.example.calorietracker.volley.VolleyRequestContainer;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,8 +46,9 @@ public class FoodActivity extends AppCompatActivity {
         LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
         LinearLayout llBarcodeTab = findViewById(R.id.tbar_barcode);
         LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
+        FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
 
-        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab);
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab, llFloatingButton);
 
         etSearch = findViewById(R.id.fa_search);
         tvRecentResult = findViewById(R.id.fa_rec_res);

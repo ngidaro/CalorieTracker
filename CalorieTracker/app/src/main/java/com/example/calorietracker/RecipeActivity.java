@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.calorietracker.navigator.ActivityNavigator;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class RecipeActivity extends AppCompatActivity {
 
@@ -28,8 +29,9 @@ public class RecipeActivity extends AppCompatActivity {
         LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
         LinearLayout llBarcodeTab = findViewById(R.id.tbar_barcode);
         LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
+        FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
 
-        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab);
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab, llFloatingButton);
 
         tvAddRecipe = findViewById(R.id.ra_add_recipe);
         tvYourRecipe = findViewById(R.id.ra_your_recipe);

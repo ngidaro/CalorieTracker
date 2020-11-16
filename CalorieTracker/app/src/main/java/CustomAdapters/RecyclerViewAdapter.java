@@ -63,33 +63,40 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         try {
             foodObj = (JSONObject) mData.get(position);
 
-            if(!foodObj.has("brandOwner")){
-                sFoodInfo = foodObj.getString("description") + ", No Brand Owner";
+            while(!foodObj.has("brandOwner")){
+                position++;
+                foodObj = (JSONObject) mData.get(position);
             }
-            else
-                sFoodInfo = foodObj.getString("description") + ", " + foodObj.getString("brandOwner");
+
+//            if(!foodObj.has("brandOwner")){
+////                sFoodInfo = foodObj.getString("description") + ", No Brand Owner";
+//            }
+//            else{
+
+            sFoodInfo = foodObj.getString("description") + ", " + foodObj.getString("brandOwner");
+
+            holder.tvFoodInfo.setText(sFoodInfo);
+
+            final JSONObject finalFoodObj = foodObj;
+            holder.tvFoodInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(applicationContext, FoodInfoActivity.class);
+                    try {
+                        intent.putExtra("fdcId", finalFoodObj.getString("fdcId"));
+                        intent.putExtra("_id", user_id);
+                        applicationContext.startActivity(intent);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        holder.tvFoodInfo.setText(sFoodInfo);
-
-        final JSONObject finalFoodObj = foodObj;
-        holder.tvFoodInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(applicationContext, FoodInfoActivity.class);
-                try {
-                    intent.putExtra("fdcId", finalFoodObj.getString("fdcId"));
-                    intent.putExtra("_id", user_id);
-                    applicationContext.startActivity(intent);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
     }
 

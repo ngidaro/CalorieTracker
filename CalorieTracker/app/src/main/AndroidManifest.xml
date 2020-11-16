@@ -27,6 +27,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".CaloriesBurnedActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".MyRecipesActivity"></activity>
         <activity android:name=".ViewRecipeActivity" />
@@ -36,7 +37,7 @@
         <activity android:name=".FoodInfoActivity" />
         <activity android:name=".FoodActivity" />
         <activity android:name=".BarcodeActivity" />
-        <activity android:name=".scaleInput" />
+        <activity android:name=".ScaleInputActivity" />
         <activity android:name=".CreateAccountActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity">

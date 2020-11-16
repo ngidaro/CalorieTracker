@@ -7,19 +7,33 @@
     tools:context=".FoodActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/caldef_title"
-        android:text="@string/caloric_deficit_input"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:textSize="32sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/cba_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_clear_24"
+            android:layout_gravity="center"
+            tools:ignore="VectorDrawableCompat"
+            android:padding="8dp"/>
+
+        <TextView
+            android:text="Calories Burned"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/caldef_note"
-        android:text="@string/enter_you_current_caloric_deficit_to_be_added_to_total_daily_caloric_intake"
+        android:text="Enter your total calories burned today"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"/>
@@ -27,18 +41,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="3">
 
         <EditText
             android:id="@+id/cal_burned"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:hint="@string/calories_burned"
+            android:hint="Calories Burned"
             android:inputType="number"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:autofillHints="calories_burned" />
+            android:autofillHints="calories_burned"
+            android:layout_weight="1" />
 
 
         <TextView
@@ -47,7 +63,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:layout_marginLeft="20dp"
-            android:text="@string/calorie"
+            android:text="kcal"
             android:layout_marginStart="20dp" />
 
         <Button
@@ -57,21 +73,10 @@
             android:layout_gravity="center"
             android:layout_marginLeft="40dp"
             android:background="#f0f0ff"
-            android:text="@string/confirm"
-            android:layout_marginStart="40dp" />
+            android:text="Save"
+            android:layout_weight="1" />
 
     </LinearLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom">
-
-
-        <include layout="@layout/tabbar" />
-
-    </RelativeLayout>
 
 
 </LinearLayout>

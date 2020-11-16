@@ -5,16 +5,16 @@ import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -26,7 +26,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import CustomAdapters.RecyclerViewAdapter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import CustomAdapters.RecyclerViewAdapterHome;
 import callbacks.IVolleyRequestCallback;
 
@@ -38,9 +40,17 @@ public class HomeActivity extends AppCompatActivity {
 
     protected TextView calorieAmount;
     protected TextView calorieLimitView;
-
     protected double calorieLimit;
 
+    TextView tvDiaryDate;
+    ImageView ivDateBack;
+    ImageView ivDateForward;
+    ImageView ivSettings;
+    Calendar calendar;
+    SimpleDateFormat dateFormat;
+    Button btnAddBurntCalories;
+
+    @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +66,23 @@ public class HomeActivity extends AppCompatActivity {
         LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
         FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
 
-        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab);
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab, llFloatingButton);
 
         // Setting the RecyclerView
         recyclerView = findViewById(R.id.ha_diary_rv);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        tvDiaryDate = findViewById(R.id.ha_diary_date);
+        ivDateBack = findViewById(R.id.ha_diary_date_back);
+        ivDateForward = findViewById(R.id.ha_diary_date_forward);
+        ivSettings = findViewById(R.id.ha_settings);
+        btnAddBurntCalories = findViewById(R.id.ha_add_burnt_calories);
+
+        calendar = Calendar.getInstance();
+        dateFormat = new SimpleDateFormat("EEE MMM d, yyyy");
+        String date = dateFormat.format(calendar.getTime());
+        tvDiaryDate.setText(date);
 
         // Display the foods added by the user in a list
         getFoodDiary(user_id);
@@ -132,7 +153,44 @@ public class HomeActivity extends AppCompatActivity {
         llFloatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               goToScaleInput();
+               goToScaleInput(user_id);
+            }
+        });
+
+        ivDateBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Change the date by -1
+//                calendar.add();
+                String date = dateFormat.format(calendar.getTime());
+                tvDiaryDate.setText(date);
+            }
+        });
+
+        ivDateForward.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Change the date by +1
+                String date = dateFormat.format(calendar.getTime());
+                tvDiaryDate.setText(date);
+            }
+        });
+
+        ivSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+                intent.putExtra("_id",user_id);
+                startActivity(intent);
+            }
+        });
+
+        btnAddBurntCalories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, CaloriesBurnedActivity.class);
+                intent.putExtra("_id",user_id);
+                startActivity(intent);
             }
         });
 
@@ -159,9 +217,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     // Takes user to scaleInput
-    protected void goToScaleInput()
+    protected void goToScaleInput(String user_id)
     {
-        Intent intent = new Intent(this,scaleInput.class);
+        Intent intent = new Intent(this, ScaleInputActivity.class);
+        intent.putExtra("_id", user_id);
         startActivity(intent);
     }
 
@@ -226,10 +285,6 @@ public class HomeActivity extends AppCompatActivity {
                         {
                             calorieAmount.setTextColor(Color.RED);
                         }
-
-
-
-
                     }
 
                     @Override

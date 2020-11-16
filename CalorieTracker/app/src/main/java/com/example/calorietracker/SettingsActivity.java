@@ -24,6 +24,8 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         title = findViewById(R.id.u_settings);
 
+        final String user_id = getIntent().getStringExtra("_id");
+
         initSettingsOptions();
 
     }
@@ -31,9 +33,9 @@ public class SettingsActivity extends AppCompatActivity {
     private void initSettingsOptions(){
 
         itemList.add("Edit Profile");
-        itemList.add("Delete Account");
         itemList.add("Change Password");
         itemList.add("Push Notifications");
+        itemList.add("Delete Account");
         itemList.add("Log Out");
         itemList.add("About Us");
 
