@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 
 import com.example.calorietracker.navigator.ActivityNavigator;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class scaleInput extends AppCompatActivity {
 
@@ -17,6 +18,18 @@ public class scaleInput extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scale_input);
+
+        final String user_id = getIntent().getStringExtra("_id");
+
+        // Code to Switch Activities
+
+        LinearLayout llHomeTab    = findViewById(R.id.tbar_home);
+        LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
+        LinearLayout llBarcodeTab = findViewById(R.id.tbar_barcode);
+        LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
+        FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
+
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab);
     }
 
     @Override
