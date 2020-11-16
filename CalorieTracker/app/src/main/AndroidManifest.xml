@@ -27,6 +27,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".SettingsActivity" />
         <activity android:name=".MyRecipesActivity"></activity>
         <activity android:name=".ViewRecipeActivity" />
         <activity android:name=".YourRecipeActivity" />
