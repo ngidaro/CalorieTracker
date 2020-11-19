@@ -11,6 +11,7 @@ import com.example.calorietracker.FoodActivity;
 import com.example.calorietracker.HomeActivity;
 import com.example.calorietracker.RecipeActivity;
 import com.example.calorietracker.ScaleInputActivity;
+import com.example.calorietracker.SettingsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ActivityNavigator extends Activity {
@@ -19,7 +20,7 @@ public class ActivityNavigator extends Activity {
                                       final String user_id,
                                       LinearLayout llHomeTab,
                                       LinearLayout llFoodTab,
-                                      LinearLayout llBarcodeTab,
+                                      LinearLayout llSettingsTab,
                                       LinearLayout llRecipeTab,
                                       FloatingActionButton fabtnScaleInput) {
 
@@ -43,11 +44,11 @@ public class ActivityNavigator extends Activity {
             }
         });
 
-        llBarcodeTab.setOnClickListener(new View.OnClickListener() {
+        llSettingsTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(applicationContext, BarcodeActivity.class);
+                Intent intent = new Intent(applicationContext, SettingsActivity.class);
                 intent.putExtra("_id", user_id);
                 v.getContext().startActivity(intent);
             }

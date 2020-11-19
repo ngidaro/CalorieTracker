@@ -29,6 +29,8 @@
             android:layout_height="match_parent"
             android:scrollbars="vertical" />
 
+        <include layout="@layout/tabbar" />
+
     </RelativeLayout>
 
 </LinearLayout>

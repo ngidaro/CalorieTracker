@@ -5,14 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.toolbox.Volley;
 
 import user.User;
 
@@ -102,7 +99,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Go back to Login Page
-                Intent intent = new Intent(CreateAccountActivity.this, MainActivity.class);
+                Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
