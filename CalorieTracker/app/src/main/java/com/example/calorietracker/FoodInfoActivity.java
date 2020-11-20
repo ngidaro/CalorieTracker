@@ -12,9 +12,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.example.calorietracker.volley.VolleyRequestContainer;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -65,103 +67,121 @@ public class FoodInfoActivity extends AppCompatActivity {
         btnAddToDiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (jsonFoodObj != null){
 
                     double dServingSize = Double.parseDouble(spinServingSize.getSelectedItem().toString());
-                    double dEnergy;
+                    double dAmount = 0;
+                    double dEnergy = 0; // id 1008 - "name": "Energy"
+                    double dProtein = 0;    // id 1003 - "name": "Protein"
+                    double dCarbs = 0;      // id 1005 - "name": "Carbohydrate, by difference"
+                    double dFat = 0;        // id 1004 - "name": "Total lipid (fat)"
+                    double dFiber = 0;      // id 1079 - "name": "Fiber, total dietary"
 
-                    double dAmount = Double.parseDouble(etAmount.getText().toString());
-
-                    // Will have to perform calculation to get exact energy:
-                    // FORMULA FOR CALCULATING NUTRIENT RATIOS:
-                    // (Nutrient Amount)*(Amount entered by user)*(Serving Size option chosen by user) / (Serving Size) = x Serving Size Units
-
-                    JSONObject jsonFood = new JSONObject();
-
-                    try
+                    if ( etAmount.getText().toString().equals("")){
+                        Toast.makeText(FoodInfoActivity.this, "Invalid Amount", Toast.LENGTH_LONG).show();
+                    }
+                    else
                     {
 
-                        JSONArray arrTemp = jsonFoodObj.getJSONArray("foodNutrients");
-                        String key = "Energy";
-                        JSONObject jsonFoodNutrientObj = null;
-                        JSONObject jsonEnergyObj;
+                        dAmount = Double.parseDouble(etAmount.getText().toString());
 
-                        for (int i = 0; i < arrTemp.length(); i++){
-                            jsonFoodNutrientObj = (JSONObject) arrTemp.get(i);
-                            jsonEnergyObj = jsonFoodNutrientObj.getJSONObject("nutrient"); // returns nutrient Object
+                        // FORMULA FOR CALCULATING NUTRIENT RATIOS:
+                        // (Nutrient Amount)*(Amount entered by user)*(Serving Size option chosen by user) / (Serving Size) = x Serving Size Units
 
-                            if (jsonEnergyObj.get("name").toString().equals( key )){
-                                break;
-                            }
+                        JSONObject jsonFood = new JSONObject();
+
+                        try
+                        {
+
+//                            JSONArray arrTemp = jsonFoodObj.getJSONArray("foodNutrients");
+//                            JSONObject jsonFoodNutrientObj = null;
+//                            JSONObject jsonEnergyObj;
+//
+//                            for (int i = 0; i < arrTemp.length(); i++){
+//                                jsonFoodNutrientObj = (JSONObject) arrTemp.get(i);
+//                                jsonEnergyObj = jsonFoodNutrientObj.getJSONObject("nutrient"); // returns nutrient Object
+//
+//                                System.out.println(jsonEnergyObj.getString("id"));
+//
+//                                switch(jsonEnergyObj.getString("id")) {
+//                                    case "1008":
+//                                        dEnergy = Double.parseDouble(jsonFoodNutrientObj.getString("amount")); // returns kcal per serving size
+//                                        break;
+//                                    case "1003":
+//                                        dProtein = Double.parseDouble(jsonFoodNutrientObj.getString("amount")); // returns kcal per serving size
+//                                        break;
+//                                    case "1005":
+//                                        dCarbs = Double.parseDouble(jsonFoodNutrientObj.getString("amount")); // returns kcal per serving size
+//                                        break;
+//                                    case "1004":
+//                                        dFat = Double.parseDouble(jsonFoodNutrientObj.getString("amount")); // returns kcal per serving size
+//                                        break;
+//                                    case "1079":
+//                                        dFiber = Double.parseDouble(jsonFoodNutrientObj.getString("amount")); // returns kcal per serving size
+//                                        break;
+//                                    default:
+//                                        break;
+//                                }
+//                            }
+
+                            JSONObject jsonLabelNutrientObj = jsonFoodObj.getJSONObject("labelNutrients");
+
+                            JSONObject jsonNutrient = jsonLabelNutrientObj.getJSONObject("calories");
+                            dEnergy = Double.parseDouble(jsonNutrient.getString("value")); // returns kcal per serving size
+
+                            jsonNutrient = jsonLabelNutrientObj.getJSONObject("protein");
+                            dProtein = Double.parseDouble(jsonNutrient.getString("value")); // returns kcal per serving size
+
+                            jsonNutrient = jsonLabelNutrientObj.getJSONObject("carbohydrates");
+                            dCarbs = Double.parseDouble(jsonNutrient.getString("value")); // returns kcal per serving size
+
+                            jsonNutrient = jsonLabelNutrientObj.getJSONObject("fat");
+                            dFat = Double.parseDouble(jsonNutrient.getString("value")); // returns kcal per serving size
+
+                            jsonFood.put("fdcId", fdcId);
+                            jsonFood.put("date", Calendar.getInstance().getTime());
+                            jsonFood.put("user_id", user_id);
+                            jsonFood.put("amount", dAmount);
+                            jsonFood.put("servingsize", dServingSize);
+                            jsonFood.put("servingunits", jsonFoodObj.getString("servingSizeUnit"));
+                            jsonFood.put("description", jsonFoodObj.getString("description"));
+                            jsonFood.put("brandowner", jsonFoodObj.getString("brandOwner"));
+
+                            jsonFood.put("energy", (dEnergy*dAmount*dServingSize/Double.parseDouble(jsonFoodObj.getString("servingSize")))); // Nutrient Id for Energy is 1008 -> see nutrient.csv
+                            jsonFood.put("protein", (dProtein*dAmount*dServingSize/Double.parseDouble(jsonFoodObj.getString("servingSize"))));
+                            jsonFood.put("carbs", (dCarbs*dAmount*dServingSize/Double.parseDouble(jsonFoodObj.getString("servingSize"))));
+                            jsonFood.put("fat", (dFat*dAmount*dServingSize/Double.parseDouble(jsonFoodObj.getString("servingSize"))));
+//                            jsonFood.put("fiber", (dFiber*dAmount*dServingSize/Double.parseDouble(jsonFoodObj.getString("servingSize"))));
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
                         }
 
-                        // jsonFoodNutrientObj:
-                        /*{
-                            "type":"FoodNutrient",
-                             "nutrient":
-                                {
-                                    "id":1008,
-                                    "number":"208",
-                                    "name":"Energy",
-                                    "rank":300,
-                                    "isNutrientLabel":false,
-                                    "indentLevel":1,
-                                    "shortestName":"Energy",
-                                    "nutrientUnit":
-                                        {
-                                            "name":"kcal",
-                                             "aliases":[]
-                                        }
-                                },
-                            "foodNutrientDerivation":
-                                {
-                                    "id":70,
-                                    "code":"LCCS",
-                                    "description":"Calculated from value per serving size measure"
-                                },
-                            "id":5502949,
-                            "amount":242,
-                            "percentDailyValue":0
-                        }*/
+                        // Store data in database:
 
-                        assert jsonFoodNutrientObj != null;
-                        dEnergy = Double.parseDouble(jsonFoodNutrientObj.getString("amount")); // returns kcal per serving size
+                        VolleyRequestContainer.request(
+                                Request.Method.POST,
+                                "/food/savediary",
+                                jsonFood,
+                                FoodInfoActivity.this,
+                                new IVolleyRequestCallback() {
+                                    @Override
+                                    public void onSuccess(JSONObject result) {
+                                        System.out.println(result.toString());
+                                        Intent intent = new Intent(FoodInfoActivity.this, HomeActivity.class);
+                                        intent.putExtra("_id",user_id);
+                                        startActivity(intent);
+                                    }
 
-                        jsonFood.put("fdcId", fdcId);
-                        jsonFood.put("date", Calendar.getInstance().getTime());
-                        jsonFood.put("user_id", user_id);
-                        jsonFood.put("amount", dAmount);
-                        jsonFood.put("servingsize", dServingSize);
-                        jsonFood.put("servingunits", jsonFoodObj.getString("servingSizeUnit"));
-                        jsonFood.put("description", jsonFoodObj.getString("description"));
-                        jsonFood.put("brandowner", jsonFoodObj.getString("brandOwner"));
-                        jsonFood.put("energy", (dEnergy*dAmount*dServingSize/Double.parseDouble(jsonFoodObj.getString("servingSize")))); // Nutrient Id for Energy is 1008 -> see nutrient.csv
-                    }
-                    catch (JSONException e){
-                        e.printStackTrace();
+                                    @Override
+                                    public void onFailure(String result) {
+                                        // Failed
+                                    }
+                                });
+
                     }
 
-                    // Store data in database:
-
-                    VolleyRequestContainer.request(
-                            Request.Method.POST,
-                            "/food/savediary",
-                            jsonFood,
-                            FoodInfoActivity.this,
-                            new IVolleyRequestCallback() {
-                                @Override
-                                public void onSuccess(JSONObject result) {
-                                    System.out.println(result.toString());
-                                    Intent intent = new Intent(FoodInfoActivity.this, HomeActivity.class);
-                                    intent.putExtra("_id",user_id);
-                                    startActivity(intent);
-                                }
-
-                                @Override
-                                public void onFailure(String result) {
-                                    // Failed
-                                }
-                            });
                 }
                 else {
                     // Error Occurred

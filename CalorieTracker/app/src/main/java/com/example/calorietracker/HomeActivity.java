@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -38,9 +38,10 @@ public class HomeActivity extends AppCompatActivity {
     protected RecyclerView.Adapter mAdapter;
     protected RecyclerView.LayoutManager layoutManager;
 
-    protected TextView calorieAmount;
-    protected TextView calorieLimitView;
-    protected double calorieLimit;
+    protected double calorieGoal;
+    protected double proteinGoal;
+    protected double netCarbsGoal;
+    protected double fatGoal;
 
     TextView tvDiaryDate;
     ImageView ivDateBack;
@@ -50,7 +51,27 @@ public class HomeActivity extends AppCompatActivity {
     SimpleDateFormat dateFormat;
     Button btnAddBurntCalories;
 
-    @SuppressLint("SimpleDateFormat")
+    ProgressBar pbEnergy;
+    ProgressBar pbProtein;
+    ProgressBar pbCarbs;
+    ProgressBar pbFat;
+
+    TextView tvEnergyValue;
+    TextView tvProteinValue;
+    TextView tvCarbsValue;
+    TextView tvFatValue;
+
+    TextView tvEnergyGoal;
+    TextView tvProteinGoal;
+    TextView tvCarbsGoal;
+    TextView tvFatGoal;
+
+    TextView tvEnergyPercent;
+    TextView tvProteinPercent;
+    TextView tvCarbsPercent;
+    TextView tvFatPercent;
+
+    @SuppressLint({"SimpleDateFormat", "SetTextI18n", "DefaultLocale"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +105,28 @@ public class HomeActivity extends AppCompatActivity {
         String date = dateFormat.format(calendar.getTime());
         tvDiaryDate.setText(date);
 
+        // Initialize id for the progress bar:
+
+        pbEnergy = findViewById(R.id.pbm_energy);
+        pbProtein = findViewById(R.id.pbm_protein);
+        pbCarbs = findViewById(R.id.pbm_carbs);
+        pbFat = findViewById(R.id.pbm_fat);
+
+        tvEnergyValue = findViewById(R.id.pbm_energy_value);
+        tvProteinValue = findViewById(R.id.pbm_protein_value);
+        tvCarbsValue = findViewById(R.id.pbm_carbs_value);
+        tvFatValue = findViewById(R.id.pbm_fat_value);
+
+        tvEnergyGoal = findViewById(R.id.pbm_energy_goal);
+        tvProteinGoal = findViewById(R.id.pbm_protein_goal);
+        tvCarbsGoal = findViewById(R.id.pbm_carbs_goal);
+        tvFatGoal = findViewById(R.id.pbm_fat_goal);
+
+        tvEnergyPercent = findViewById(R.id.pbm_energy_percent);
+        tvProteinPercent = findViewById(R.id.pbm_protein_percent);
+        tvCarbsPercent = findViewById(R.id.pbm_carbs_percent);
+        tvFatPercent = findViewById(R.id.pbm_fat_percent);
+
         // Display the foods added by the user in a list
         getFoodDiary(user_id);
 
@@ -95,19 +138,20 @@ public class HomeActivity extends AppCompatActivity {
         double BMR=0;
         double weightLossWeekly;
         int age;
-        calorieLimit=0;
+        calorieGoal =0;
 
         gender = "Male";
 
         activityLevel = "hard exercise";
-
         age = 21;
-
         weight = 168;
-
         height = 70;
-
         weightLossWeekly = 1.5;
+
+        // Macro Nutrient ratios:
+        double proteinRatio = 0.15;
+        double netCarbsRatio = 0.05;
+        double fatRatio = 0.80;
 
         // Formula for calorie limit obtained from: http://www.checkyourhealth.org/eat-healthy/cal_calculator.php
 
@@ -117,15 +161,15 @@ public class HomeActivity extends AppCompatActivity {
             BMR = 66 + (6.3*weight) + 12.9*height - 6.8*age;
 
             if (activityLevel.equals("little or no exercise"))
-                calorieLimit = BMR*1.2-weightLossWeekly*500;
+                calorieGoal = BMR*1.2-weightLossWeekly*500;
             else if (activityLevel.equals("light exercise"))
-                calorieLimit = BMR*1.375-weightLossWeekly*500;
+                calorieGoal = BMR*1.375-weightLossWeekly*500;
             else if (activityLevel.equals("moderate exercise"))
-                calorieLimit = BMR*1.55-weightLossWeekly*500;
+                calorieGoal = BMR*1.55-weightLossWeekly*500;
             else if (activityLevel.equals("hard exercise"))
-                calorieLimit = BMR*1.725-weightLossWeekly*500;
+                calorieGoal = BMR*1.725-weightLossWeekly*500;
             else if (activityLevel.equals("very hard exercise"))
-                calorieLimit = BMR*1.9-weightLossWeekly*500;
+                calorieGoal = BMR*1.9-weightLossWeekly*500;
         }
 
         // Determining calorie limit for female
@@ -134,20 +178,34 @@ public class HomeActivity extends AppCompatActivity {
             BMR = 665 + (4.3*weight) + 4.7*height - 4.7*age;
 
             if (activityLevel.equals("little or no exercise"))
-                calorieLimit = BMR*1.2-weightLossWeekly*500;
+                calorieGoal = BMR*1.2-weightLossWeekly*500;
             if (activityLevel.equals("light exercise"))
-                calorieLimit = BMR*1.375-weightLossWeekly*500;
+                calorieGoal = BMR*1.375-weightLossWeekly*500;
             if (activityLevel.equals("moderate exercise"))
-                calorieLimit = BMR*1.55-weightLossWeekly*500;
+                calorieGoal = BMR*1.55-weightLossWeekly*500;
             if (activityLevel.equals("hard exercise"))
-                calorieLimit = BMR*1.725-weightLossWeekly*500;
+                calorieGoal = BMR*1.725-weightLossWeekly*500;
             if (activityLevel.equals("very hard exercise"))
-                calorieLimit = BMR*1.9-weightLossWeekly*500;
+                calorieGoal = BMR*1.9-weightLossWeekly*500;
         }
 
-        calorieLimitView = findViewById(R.id.ha_limit);
-        calorieLimitView.setText(""+calorieLimit);
+        // Calculate the macronutrients based on the ratios given
+        proteinGoal = (calorieGoal * proteinRatio) / 4;
+        netCarbsGoal = (calorieGoal * netCarbsRatio) / 4;
+        fatGoal = (calorieGoal * fatRatio) / 9;
 
+        // Set the maximum for the Progress Bars
+        tvEnergyGoal.setText(String.format("%.1f", calorieGoal));
+        pbEnergy.setMax((int)(calorieGoal));
+
+        tvProteinGoal.setText(String.format("%.1f", proteinGoal));
+        pbProtein.setMax((int)(proteinGoal));
+
+        tvCarbsGoal.setText(String.format("%.1f", netCarbsGoal));
+        pbCarbs.setMax((int)(netCarbsGoal));
+
+        tvFatGoal.setText(String.format("%.1f", fatGoal));
+        pbFat.setMax((int)(fatGoal));
 
         // Button to go to scale input
         llFloatingButton.setOnClickListener(new View.OnClickListener() {
@@ -265,18 +323,33 @@ public class HomeActivity extends AppCompatActivity {
                 jsonFood,
                 this,
                 new IVolleyRequestCallback() {
+                    @SuppressLint({"SetTextI18n", "DefaultLocale"})
                     @Override
                     public void onSuccess(JSONObject result) {
                         System.out.println(result.toString());
                         JSONArray jsonArrayFoods = null;
-                        double calorie=0;
                         JSONObject foodObj = null;
+
+                        double dEnergy = 0;
+                        double dProtein = 0;
+                        double dCarbs = 0;
+                        double dFat = 0;
+//                        double dFiber = 0;
+
                         try {
 
                             jsonArrayFoods = result.getJSONArray("foodDiary");
+
                             for (int i=0; i<jsonArrayFoods.length(); i++) {
                                 foodObj = (JSONObject) jsonArrayFoods.get(i);
-                                calorie += Double.parseDouble(foodObj.getString("energy"));
+
+                                // Sum the total macros and calories of all foods in the list for that day
+                                dEnergy += Double.parseDouble(foodObj.getString("energy"));
+                                dProtein += Double.parseDouble(foodObj.getString("protein"));
+                                dCarbs += Double.parseDouble(foodObj.getString("carbohydrates"));
+                                dFat += Double.parseDouble(foodObj.getString("fat"));
+//                                dFiber += Double.parseDouble(foodObj.getString("fiber"));
+
                             }
 
                         }catch (JSONException e) {
@@ -286,12 +359,8 @@ public class HomeActivity extends AppCompatActivity {
                         mAdapter = new RecyclerViewAdapterHome(jsonArrayFoods, HomeActivity.this, user_id);
                         recyclerView.setAdapter(mAdapter);
 
-                        calorieAmount = findViewById(R.id.ha_amount);
-                        calorieAmount.setText(""+calorie);
-                        if (calorie>calorieLimit)
-                        {
-                            calorieAmount.setTextColor(Color.RED);
-                        }
+                        populateProgressBar(dEnergy, dProtein, dCarbs, dFat);
+
                     }
 
                     @Override
@@ -299,5 +368,29 @@ public class HomeActivity extends AppCompatActivity {
                         // Failed
                     }
                 });
+    }
+
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
+    public void populateProgressBar(double dEnergy,
+                                    double dProtein,
+                                    double dCarbs,
+                                    double dFat){
+
+        tvEnergyValue.setText(String.format("%.1f", dEnergy));
+        pbEnergy.setProgress((int)dEnergy);
+        tvEnergyPercent.setText(String.format("%.0f", (dEnergy/ calorieGoal)*100) + " %");
+
+        tvProteinValue.setText(String.format("%.1f", dProtein));
+        pbProtein.setProgress((int)dProtein);
+        tvProteinPercent.setText(String.format("%.0f", (dProtein/ proteinGoal)*100) + " %");
+
+        tvCarbsValue.setText(String.format("%.1f", dCarbs));
+        pbCarbs.setProgress((int)(dCarbs));
+        tvCarbsPercent.setText(String.format("%.0f", ((dCarbs)/ netCarbsGoal)*100) + " %");
+
+        tvFatValue.setText(String.format("%.1f", dFat));
+        pbFat.setProgress((int)dFat);
+        tvFatPercent.setText(String.format("%.0f", (dFat/ fatGoal)*100) + " %");
+
     }
 }
