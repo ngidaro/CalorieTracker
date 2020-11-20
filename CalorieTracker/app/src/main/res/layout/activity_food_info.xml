@@ -55,6 +55,7 @@
             android:padding="8dp"
             android:layout_gravity="top"
             android:textAlignment="center"
+            android:inputType="number"
             tools:ignore="RtlCompat" />
 
     </LinearLayout>
