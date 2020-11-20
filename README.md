@@ -1,5 +1,11 @@
 # CalorieTracker
 
+Few thing to keep in mind:
+
+- When pulling the code, don't forget to change the IP address in VolleyContainer class to the IP of your machine. 
+- Also, make sure that the code on lines 43 to 54 in LoginActivity are UNCOMMENTED and that the lines 39 to 41 are COMMENTED.
+    - The lines were commented out for dev purposes.
+
 Cloning the Repository:
 
 - In the Fork application, got to File > Clone.
@@ -63,7 +69,3 @@ Submitting a Pull Request:
 - When everything is good to go, someone in the team can merge the pull request to the master branch.
 
 - After the Code has been merged to master branch, do a pull and rebase in the fork application do update your local branch with the code in master.
-
-
-
-
