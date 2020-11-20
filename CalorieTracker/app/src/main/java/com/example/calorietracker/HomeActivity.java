@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
     TextView tvDiaryDate;
     ImageView ivDateBack;
     ImageView ivDateForward;
-    ImageView ivSettings;
+    ImageView ivDateToday;
     Calendar calendar;
     SimpleDateFormat dateFormat;
     Button btnAddBurntCalories;
@@ -62,11 +62,11 @@ public class HomeActivity extends AppCompatActivity {
 
         LinearLayout llHomeTab    = findViewById(R.id.tbar_home);
         LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
-        LinearLayout llBarcodeTab = findViewById(R.id.tbar_barcode);
+        LinearLayout llSettingsTab = findViewById(R.id.tbar_settings);
         LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
         FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
 
-        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab, llFloatingButton);
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llSettingsTab, llRecipeTab, llFloatingButton);
 
         // Setting the RecyclerView
         recyclerView = findViewById(R.id.ha_diary_rv);
@@ -76,8 +76,8 @@ public class HomeActivity extends AppCompatActivity {
         tvDiaryDate = findViewById(R.id.ha_diary_date);
         ivDateBack = findViewById(R.id.ha_diary_date_back);
         ivDateForward = findViewById(R.id.ha_diary_date_forward);
-        ivSettings = findViewById(R.id.ha_settings);
         btnAddBurntCalories = findViewById(R.id.ha_add_burnt_calories);
+        ivDateToday = findViewById(R.id.ha_today);
 
         calendar = Calendar.getInstance();
         dateFormat = new SimpleDateFormat("EEE MMM d, yyyy");
@@ -149,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
         calorieLimitView.setText(""+calorieLimit);
 
 
-        // Buton to go to scale input
+        // Button to go to scale input
         llFloatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,9 +161,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Change the date by -1
-//                calendar.add();
+                calendar.add(Calendar.DATE, -1);
                 String date = dateFormat.format(calendar.getTime());
                 tvDiaryDate.setText(date);
+                getFoodDiary(user_id);
             }
         });
 
@@ -171,12 +172,24 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Change the date by +1
+                calendar.add(Calendar.DATE, 1);
                 String date = dateFormat.format(calendar.getTime());
                 tvDiaryDate.setText(date);
+                getFoodDiary(user_id);
             }
         });
 
-        ivSettings.setOnClickListener(new View.OnClickListener() {
+        ivDateToday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar = Calendar.getInstance();
+                String date = dateFormat.format(calendar.getTime());
+                tvDiaryDate.setText(date);
+                getFoodDiary(user_id);
+            }
+        });
+
+        llSettingsTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
@@ -224,13 +237,6 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Takes user to BarcodeActivity
-    protected void goToBarcodeActivity()
-    {
-        Intent intent = new Intent(this,BarcodeActivity.class);
-        startActivity(intent);
-    }
-
     // Prevents user from pressing back into the login screen
     @Override
     public void onBackPressed()
@@ -247,6 +253,7 @@ public class HomeActivity extends AppCompatActivity {
         try
         {
             jsonFood.put("user_id", user_id);
+            jsonFood.put("date", calendar.getTime());
         }
         catch (JSONException e){
             e.printStackTrace();

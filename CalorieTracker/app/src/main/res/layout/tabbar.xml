@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="#89cff0"
         app:fabAlignmentMode="center"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="10dp"
@@ -42,7 +42,7 @@
                     android:layout_height="20dp"
                     android:clickable="true"
                     android:padding="0dp"
-                    android:src="@drawable/ic_home_icon" />
+                    android:src="@drawable/ic_baseline_home_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:padding="0dp"
-                    android:src="@drawable/ic_food_icon" />
+                    android:src="@drawable/ic_baseline_fastfood_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,31 +86,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/tbar_barcode"
-                android:layout_weight="3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:gravity="center" >
-
-                <ImageView
-                    android:id="@+id/barcode_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:clickable="true"
-                    android:padding="0dp"
-                    android:src="@drawable/ic_barcode_icon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Barcode"
-                    android:textColor="#ffffff" />
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:id="@+id/tbar_recipe"
                 android:layout_weight="3"
                 android:layout_width="0dp"
@@ -123,13 +98,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:padding="0dp"
-                    android:src="@drawable/ic_recipe_icon" />
+                    android:src="@drawable/ic_baseline_recipe_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Recipe"
                     android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tbar_settings"
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_baseline_settings_24"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Settings"
+                    android:textColor="#ffffff" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -140,9 +138,9 @@
         android:id="@+id/floating_action_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:tint="@android:color/white"
+        android:backgroundTint="#4169E1"
         app:fabSize="normal"
         app:layout_anchor="@id/bottom_app_bar"
-        app:srcCompat="@drawable/add" />
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

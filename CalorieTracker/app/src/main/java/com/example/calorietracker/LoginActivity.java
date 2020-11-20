@@ -9,15 +9,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
-
-import api.API;
 import user.User;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     Button btnLogin;
     EditText etUsername;
@@ -42,29 +36,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Temporary for dev purposes
-//                User.getUser("ngidaro",
-//                        "123",
-//                        MainActivity.this);
+                User.getUser("ngidaro",
+                        "123",
+                        LoginActivity.this);
 
-                if(etUsername.getText().toString().equals("") ||
-                   etPassword.getText().toString().equals(""))
-                {
-                    // One or more fields are empty
-                }
-                else {
-
-                    User.getUser(etUsername.getText().toString(),
-                            etPassword.getText().toString(),
-                            MainActivity.this);
-
-                }
+//                if(etUsername.getText().toString().equals("") ||
+//                   etPassword.getText().toString().equals(""))
+//                {
+//                    // One or more fields are empty
+//                }
+//                else {
+//
+//                    User.getUser(etUsername.getText().toString(),
+//                            etPassword.getText().toString(),
+//                            LoginActivity.this);
+//
+//                }
             }
         });
 
         tvCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CreateAccountActivity.class);
+                Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
             }
         });

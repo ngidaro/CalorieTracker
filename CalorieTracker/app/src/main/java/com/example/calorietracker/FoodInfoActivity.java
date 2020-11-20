@@ -21,6 +21,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import callbacks.IVolleyRequestCallback;
 
@@ -126,6 +128,7 @@ public class FoodInfoActivity extends AppCompatActivity {
                         dEnergy = Double.parseDouble(jsonFoodNutrientObj.getString("amount")); // returns kcal per serving size
 
                         jsonFood.put("fdcId", fdcId);
+                        jsonFood.put("date", Calendar.getInstance().getTime());
                         jsonFood.put("user_id", user_id);
                         jsonFood.put("amount", dAmount);
                         jsonFood.put("servingsize", dServingSize);

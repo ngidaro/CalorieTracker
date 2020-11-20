@@ -51,11 +51,11 @@ public class BarcodeActivity extends AppCompatActivity {
 
         LinearLayout llHomeTab    = findViewById(R.id.tbar_home);
         LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
-        LinearLayout llBarcodeTab = findViewById(R.id.tbar_barcode);
+        LinearLayout llSettingsTab = findViewById(R.id.tbar_settings);
         LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
         FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
 
-        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llBarcodeTab, llRecipeTab, llFloatingButton);
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llSettingsTab, llRecipeTab, llFloatingButton);
 
         // The view of the camera and the text that shows what the barcode reads
        surfaceView = (SurfaceView) findViewById(R.id.barcode_view);
