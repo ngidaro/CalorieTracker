@@ -2,7 +2,7 @@
 
 Few thing to keep in mind:
 
-- When pulling the code, don't forget to change the IP address in VolleyContainer class to the IP of your machine. 
+- When pulling the code, don't forget to change the IP address in VolleyRequestContainer class to the IP of your machine. 
 - Also, make sure that the code on lines 43 to 54 in LoginActivity are UNCOMMENTED and that the lines 39 to 41 are COMMENTED.
     - The lines were commented out for dev purposes.
 
