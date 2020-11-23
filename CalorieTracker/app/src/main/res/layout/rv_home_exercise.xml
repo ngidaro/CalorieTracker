@@ -10,41 +10,26 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_apple"
+        app:srcCompat="@drawable/ic_running"
         android:layout_gravity="center"
         android:paddingRight="8dp"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/rv_home_exercise_name"
+        android:text="Exercise Name"
+        android:textColor="#000010"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="3">
-
-        <TextView
-            android:text="Food Name"
-            android:id="@+id/rv_home_food"
-            android:textColor="#000010"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/rv_home_serving"
-            android:text="Serving Size"
-            android:textColor="#000010"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
+        android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/rv_home_calories"
-        android:text="457 kcal"
+        android:id="@+id/rv_home_exercise_cal"
+        android:text="0 kcal"
         android:textColor="#000010"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="right"
-        android:layout_weight="1"/>
+        android:layout_weight="4"/>
 
 
 </LinearLayout>
