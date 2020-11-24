@@ -2,6 +2,7 @@ package com.example.calorietracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
+import androidx.recyclerview.widget.ConcatAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,19 +30,35 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import CustomAdapters.RecyclerViewAdapter;
 import CustomAdapters.RecyclerViewAdapterHome;
+import CustomAdapters.RecyclerViewAdapterHomeExercise;
 import callbacks.IVolleyRequestCallback;
 
 public class HomeActivity extends AppCompatActivity {
 
-    protected RecyclerView recyclerView;
     protected RecyclerView.Adapter mAdapter;
-    protected RecyclerView.LayoutManager layoutManager;
+    protected RecyclerView.Adapter mAdapterExercise;
 
-    protected double calorieGoal;
-    protected double proteinGoal;
-    protected double netCarbsGoal;
-    protected double fatGoal;
+    protected RecyclerView.LayoutManager layoutManager;
+    protected RecyclerView rvConcat;
+    protected ConcatAdapter concatAdapter;
+
+    protected double dCalorieGoal;
+    protected double dProteinGoal;
+    protected double dCarbsGoal;
+    protected double dFatGoal;
+
+    // Macro Nutrient ratios:
+    double dProteinRatio = 0.15;
+    double dCarbsRatio = 0.05;
+    double dFatRatio = 0.80;
+
+    // Quantity
+    double dEnergy = 0;
+    double dProtein = 0;
+    double dCarbs = 0;
+    double dFat = 0;
 
     TextView tvDiaryDate;
     ImageView ivDateBack;
@@ -89,10 +106,10 @@ public class HomeActivity extends AppCompatActivity {
 
         ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llSettingsTab, llRecipeTab, llFloatingButton);
 
-        // Setting the RecyclerView
-        recyclerView = findViewById(R.id.ha_diary_rv);
+        // Concat Adapter to combine foods and exercise adapters
         layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        rvConcat = findViewById(R.id.ha_diary_rv);
+        rvConcat.setLayoutManager(layoutManager);
 
         tvDiaryDate = findViewById(R.id.ha_diary_date);
         ivDateBack = findViewById(R.id.ha_diary_date_back);
@@ -138,7 +155,7 @@ public class HomeActivity extends AppCompatActivity {
         double BMR=0;
         double weightLossWeekly;
         int age;
-        calorieGoal =0;
+        dCalorieGoal =0;
 
         gender = "Male";
 
@@ -148,11 +165,6 @@ public class HomeActivity extends AppCompatActivity {
         height = 70;
         weightLossWeekly = 1.5;
 
-        // Macro Nutrient ratios:
-        double proteinRatio = 0.15;
-        double netCarbsRatio = 0.05;
-        double fatRatio = 0.80;
-
         // Formula for calorie limit obtained from: http://www.checkyourhealth.org/eat-healthy/cal_calculator.php
 
         // Determining calorie limit for male
@@ -161,15 +173,15 @@ public class HomeActivity extends AppCompatActivity {
             BMR = 66 + (6.3*weight) + 12.9*height - 6.8*age;
 
             if (activityLevel.equals("little or no exercise"))
-                calorieGoal = BMR*1.2-weightLossWeekly*500;
+                dCalorieGoal = BMR*1.2-weightLossWeekly*500;
             else if (activityLevel.equals("light exercise"))
-                calorieGoal = BMR*1.375-weightLossWeekly*500;
+                dCalorieGoal = BMR*1.375-weightLossWeekly*500;
             else if (activityLevel.equals("moderate exercise"))
-                calorieGoal = BMR*1.55-weightLossWeekly*500;
+                dCalorieGoal = BMR*1.55-weightLossWeekly*500;
             else if (activityLevel.equals("hard exercise"))
-                calorieGoal = BMR*1.725-weightLossWeekly*500;
+                dCalorieGoal = BMR*1.725-weightLossWeekly*500;
             else if (activityLevel.equals("very hard exercise"))
-                calorieGoal = BMR*1.9-weightLossWeekly*500;
+                dCalorieGoal = BMR*1.9-weightLossWeekly*500;
         }
 
         // Determining calorie limit for female
@@ -178,34 +190,18 @@ public class HomeActivity extends AppCompatActivity {
             BMR = 665 + (4.3*weight) + 4.7*height - 4.7*age;
 
             if (activityLevel.equals("little or no exercise"))
-                calorieGoal = BMR*1.2-weightLossWeekly*500;
+                dCalorieGoal = BMR*1.2-weightLossWeekly*500;
             if (activityLevel.equals("light exercise"))
-                calorieGoal = BMR*1.375-weightLossWeekly*500;
+                dCalorieGoal = BMR*1.375-weightLossWeekly*500;
             if (activityLevel.equals("moderate exercise"))
-                calorieGoal = BMR*1.55-weightLossWeekly*500;
+                dCalorieGoal = BMR*1.55-weightLossWeekly*500;
             if (activityLevel.equals("hard exercise"))
-                calorieGoal = BMR*1.725-weightLossWeekly*500;
+                dCalorieGoal = BMR*1.725-weightLossWeekly*500;
             if (activityLevel.equals("very hard exercise"))
-                calorieGoal = BMR*1.9-weightLossWeekly*500;
+                dCalorieGoal = BMR*1.9-weightLossWeekly*500;
         }
 
-        // Calculate the macronutrients based on the ratios given
-        proteinGoal = (calorieGoal * proteinRatio) / 4;
-        netCarbsGoal = (calorieGoal * netCarbsRatio) / 4;
-        fatGoal = (calorieGoal * fatRatio) / 9;
-
-        // Set the maximum for the Progress Bars
-        tvEnergyGoal.setText(String.format("%.1f", calorieGoal));
-        pbEnergy.setMax((int)(calorieGoal));
-
-        tvProteinGoal.setText(String.format("%.1f", proteinGoal));
-        pbProtein.setMax((int)(proteinGoal));
-
-        tvCarbsGoal.setText(String.format("%.1f", netCarbsGoal));
-        pbCarbs.setMax((int)(netCarbsGoal));
-
-        tvFatGoal.setText(String.format("%.1f", fatGoal));
-        pbFat.setMax((int)(fatGoal));
+        setMacros(dCalorieGoal);
 
         // Button to go to scale input
         llFloatingButton.setOnClickListener(new View.OnClickListener() {
@@ -330,12 +326,6 @@ public class HomeActivity extends AppCompatActivity {
                         JSONArray jsonArrayFoods = null;
                         JSONObject foodObj = null;
 
-                        double dEnergy = 0;
-                        double dProtein = 0;
-                        double dCarbs = 0;
-                        double dFat = 0;
-//                        double dFiber = 0;
-
                         try {
 
                             jsonArrayFoods = result.getJSONArray("foodDiary");
@@ -348,8 +338,6 @@ public class HomeActivity extends AppCompatActivity {
                                 dProtein += Double.parseDouble(foodObj.getString("protein"));
                                 dCarbs += Double.parseDouble(foodObj.getString("carbohydrates"));
                                 dFat += Double.parseDouble(foodObj.getString("fat"));
-//                                dFiber += Double.parseDouble(foodObj.getString("fiber"));
-
                             }
 
                         }catch (JSONException e) {
@@ -357,9 +345,10 @@ public class HomeActivity extends AppCompatActivity {
                         }
 
                         mAdapter = new RecyclerViewAdapterHome(jsonArrayFoods, HomeActivity.this, user_id);
-                        recyclerView.setAdapter(mAdapter);
 
-                        populateProgressBar(dEnergy, dProtein, dCarbs, dFat);
+                        populateProgressBar();
+
+                        getExerciseDiary(user_id);
 
                     }
 
@@ -370,27 +359,108 @@ public class HomeActivity extends AppCompatActivity {
                 });
     }
 
+    public void setMacros( double calGoal )
+    {
+        // Calculate the macronutrients based on the ratios given
+        dCalorieGoal = calGoal;
+        dProteinGoal = (dCalorieGoal * dProteinRatio) / 4;
+        dCarbsGoal = (dCalorieGoal * dCarbsRatio) / 4;
+        dFatGoal = (dCalorieGoal * dFatRatio) / 9;
+
+        // Set the maximum for the Progress Bars
+        tvEnergyGoal.setText(String.format("%.1f", dCalorieGoal));
+        pbEnergy.setMax((int)(dCalorieGoal));
+
+        tvProteinGoal.setText(String.format("%.1f", dProteinGoal));
+        pbProtein.setMax((int)(dProteinGoal));
+
+        tvCarbsGoal.setText(String.format("%.1f", dCarbsGoal));
+        pbCarbs.setMax((int)(dCarbsGoal));
+
+        tvFatGoal.setText(String.format("%.1f", dFatGoal));
+        pbFat.setMax((int)(dFatGoal));
+    }
+
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
-    public void populateProgressBar(double dEnergy,
-                                    double dProtein,
-                                    double dCarbs,
-                                    double dFat){
+    public void populateProgressBar(){
 
         tvEnergyValue.setText(String.format("%.1f", dEnergy));
         pbEnergy.setProgress((int)dEnergy);
-        tvEnergyPercent.setText(String.format("%.0f", (dEnergy/ calorieGoal)*100) + " %");
+        tvEnergyPercent.setText(String.format("%.0f", (dEnergy/ dCalorieGoal)*100) + " %");
 
         tvProteinValue.setText(String.format("%.1f", dProtein));
         pbProtein.setProgress((int)dProtein);
-        tvProteinPercent.setText(String.format("%.0f", (dProtein/ proteinGoal)*100) + " %");
+        tvProteinPercent.setText(String.format("%.0f", (dProtein/ dProteinGoal)*100) + " %");
 
         tvCarbsValue.setText(String.format("%.1f", dCarbs));
         pbCarbs.setProgress((int)(dCarbs));
-        tvCarbsPercent.setText(String.format("%.0f", ((dCarbs)/ netCarbsGoal)*100) + " %");
+        tvCarbsPercent.setText(String.format("%.0f", ((dCarbs)/ dCarbsGoal)*100) + " %");
 
         tvFatValue.setText(String.format("%.1f", dFat));
         pbFat.setProgress((int)dFat);
-        tvFatPercent.setText(String.format("%.0f", (dFat/ fatGoal)*100) + " %");
+        tvFatPercent.setText(String.format("%.0f", (dFat/ dFatGoal)*100) + " %");
 
     }
+
+    public void getExerciseDiary(final String user_id)
+    {
+
+        JSONObject jsonExercise = new JSONObject();
+
+        try
+        {
+            jsonExercise.put("user_id", user_id);
+            jsonExercise.put("date", calendar.getTime());
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        VolleyRequestContainer.request(
+                Request.Method.POST,
+                "/exercise/getexercise",
+                jsonExercise,
+                this,
+                new IVolleyRequestCallback() {
+                    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        System.out.println(result.toString());
+
+                         JSONArray jsonArrayExercises = null;
+                         int iCaloriesBurned = 0;
+
+                         try {
+                             jsonArrayExercises = result.getJSONArray("exercise");
+
+                             for (int i = 0; i < jsonArrayExercises.length(); i++)
+                             {
+                                 JSONObject jsonExercise = (JSONObject) jsonArrayExercises.get(i);
+                                 iCaloriesBurned += jsonExercise.getInt("caloriesburned");
+                             }
+
+                         } catch (JSONException e) {
+                             e.printStackTrace();
+                         }
+
+                         System.out.println(iCaloriesBurned);
+
+                         setMacros(dCalorieGoal+iCaloriesBurned);
+
+                        mAdapterExercise = new RecyclerViewAdapterHomeExercise(jsonArrayExercises);
+
+                        concatAdapter = new ConcatAdapter(mAdapter, mAdapterExercise);
+                        rvConcat.setAdapter(concatAdapter);
+
+                        populateProgressBar();
+
+                    }
+
+                    @Override
+                    public void onFailure(String result) {
+                        // Failed
+                    }
+                });
+    }
+
 }
