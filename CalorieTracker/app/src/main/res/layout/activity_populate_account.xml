@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PopulateAccountActivity"
+    android:padding="16dp">
+
+    <TextView
+        android:text="Welcome, let's Build your Profile!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="32dp"
+        android:textColor="#000000"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gender"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+        <Spinner
+            android:id="@+id/paa_spin_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Age"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/paa_age"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Age"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Height (cm)"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/paa_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Height"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight (kg)"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/paa_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Weight"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Target Weight (kg)"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+        <EditText
+            android:id="@+id/paa_target_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Weight"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activity Level"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"/>
+
+        <Spinner
+            android:id="@+id/paa_spin_activity_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/paa_continue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue"
+        android:backgroundTint="#4169E1"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"/>
+
+</LinearLayout>
