@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.android.volley.Request;
 import com.example.calorietracker.HomeActivity;
+import com.example.calorietracker.PopulateAccountActivity;
 import com.example.calorietracker.volley.VolleyRequestContainer;
 
 import org.json.JSONException;
@@ -94,8 +95,7 @@ public class User {
                             e.printStackTrace();
                         }
 
-                        Intent intent = new Intent(applicationContext, HomeActivity.class);
-                        intent.putExtra("username", username);
+                        Intent intent = new Intent(applicationContext, PopulateAccountActivity.class);
                         intent.putExtra( "_id", user_id);
                         applicationContext.startActivity(intent);
 
@@ -107,5 +107,4 @@ public class User {
                     }
                 });
     }
-
 }

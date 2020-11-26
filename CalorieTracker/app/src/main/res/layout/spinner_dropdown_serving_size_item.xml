@@ -7,7 +7,7 @@
     <TextView
         android:text="test"
         android:id="@+id/sdssi_serving_amount"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000010"
         android:gravity="right"

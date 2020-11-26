@@ -18,18 +18,16 @@ public class LoginActivity extends AppCompatActivity {
     EditText etPassword;
 
     TextView tvCreateAccount;
-    TextView tvForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         btnLogin = findViewById(R.id.log_login);
         etUsername = findViewById(R.id.log_username);
         etPassword = findViewById(R.id.log_password);
         tvCreateAccount = findViewById(R.id.log_create_account);
-        tvForgotPassword = findViewById(R.id.log_forgot_pass);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

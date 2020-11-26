@@ -27,9 +27,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".PopulateAccountActivity"></activity>
         <activity android:name=".CaloriesBurnedActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".MyRecipesActivity"></activity>
+        <activity android:name=".MyRecipesActivity" />
         <activity android:name=".ViewRecipeActivity" />
         <activity android:name=".YourRecipeActivity" />
         <activity android:name=".AddRecipeActivity" />

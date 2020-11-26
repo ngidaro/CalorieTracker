@@ -66,15 +66,6 @@
             android:textColor="#0000FF"
             android:layout_marginTop="16dp"/>
 
-        <TextView
-            android:id="@+id/log_forgot_pass"
-            android:text="Forgot Password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="#0000FF"/>
-
-
     </LinearLayout>
 
 

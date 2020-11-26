@@ -69,16 +69,16 @@
         android:weightSum="6">
 
         <TextView
-            android:layout_width="290dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="5"
             android:textColor="#000010"
             android:padding="4dp"
             android:text="Serving Size" />
 
         <Spinner
             android:id="@+id/fia_spin_serving_size"
-            android:layout_width="61dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
@@ -88,7 +88,6 @@
             android:id="@+id/fia_serving_size_units"
             android:text="g"
             android:textColor="#000010"
-            android:layout_weight="2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"/>

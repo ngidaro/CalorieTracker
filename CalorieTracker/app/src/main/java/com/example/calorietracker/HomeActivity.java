@@ -30,7 +30,6 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import CustomAdapters.RecyclerViewAdapter;
 import CustomAdapters.RecyclerViewAdapterHome;
 import CustomAdapters.RecyclerViewAdapterHomeExercise;
 import callbacks.IVolleyRequestCallback;
@@ -50,15 +49,28 @@ public class HomeActivity extends AppCompatActivity {
     protected double dFatGoal;
 
     // Macro Nutrient ratios:
-    double dProteinRatio = 0.15;
-    double dCarbsRatio = 0.05;
-    double dFatRatio = 0.80;
+//    double dProteinRatio = 0.15;
+//    double dCarbsRatio = 0.05;
+//    double dFatRatio = 0.80;
+
+    double dProteinRatio = 0;
+    double dCarbsRatio = 0;
+    double dFatRatio = 0;
 
     // Quantity
     double dEnergy = 0;
     double dProtein = 0;
     double dCarbs = 0;
     double dFat = 0;
+
+    String sGender;
+    String sActivityLevel;
+    double dWeight;
+    double dHeight;
+    double BMR=0;
+    double dTargetWeight;
+    double dWeightLossWeekly;
+    int iAge;
 
     TextView tvDiaryDate;
     ImageView ivDateBack;
@@ -144,64 +156,8 @@ public class HomeActivity extends AppCompatActivity {
         tvCarbsPercent = findViewById(R.id.pbm_carbs_percent);
         tvFatPercent = findViewById(R.id.pbm_fat_percent);
 
-        // Display the foods added by the user in a list
-        getFoodDiary(user_id);
-
-        // Set Daily Calorie Limit
-        String gender;
-        String activityLevel;
-        double weight;
-        double height;
-        double BMR=0;
-        double weightLossWeekly;
-        int age;
-        dCalorieGoal =0;
-
-        gender = "Male";
-
-        activityLevel = "hard exercise";
-        age = 21;
-        weight = 168;
-        height = 70;
-        weightLossWeekly = 1.5;
-
-        // Formula for calorie limit obtained from: http://www.checkyourhealth.org/eat-healthy/cal_calculator.php
-
-        // Determining calorie limit for male
-        if (gender.equals("Male"))
-        {
-            BMR = 66 + (6.3*weight) + 12.9*height - 6.8*age;
-
-            if (activityLevel.equals("little or no exercise"))
-                dCalorieGoal = BMR*1.2-weightLossWeekly*500;
-            else if (activityLevel.equals("light exercise"))
-                dCalorieGoal = BMR*1.375-weightLossWeekly*500;
-            else if (activityLevel.equals("moderate exercise"))
-                dCalorieGoal = BMR*1.55-weightLossWeekly*500;
-            else if (activityLevel.equals("hard exercise"))
-                dCalorieGoal = BMR*1.725-weightLossWeekly*500;
-            else if (activityLevel.equals("very hard exercise"))
-                dCalorieGoal = BMR*1.9-weightLossWeekly*500;
-        }
-
-        // Determining calorie limit for female
-        if (gender.equals("Female"))
-        {
-            BMR = 665 + (4.3*weight) + 4.7*height - 4.7*age;
-
-            if (activityLevel.equals("little or no exercise"))
-                dCalorieGoal = BMR*1.2-weightLossWeekly*500;
-            if (activityLevel.equals("light exercise"))
-                dCalorieGoal = BMR*1.375-weightLossWeekly*500;
-            if (activityLevel.equals("moderate exercise"))
-                dCalorieGoal = BMR*1.55-weightLossWeekly*500;
-            if (activityLevel.equals("hard exercise"))
-                dCalorieGoal = BMR*1.725-weightLossWeekly*500;
-            if (activityLevel.equals("very hard exercise"))
-                dCalorieGoal = BMR*1.9-weightLossWeekly*500;
-        }
-
-        setMacros(dCalorieGoal);
+        // Populate Page and Display the foods added by the user in a list
+        getUser(user_id);
 
         // Button to go to scale input
         llFloatingButton.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +174,7 @@ public class HomeActivity extends AppCompatActivity {
                 calendar.add(Calendar.DATE, -1);
                 String date = dateFormat.format(calendar.getTime());
                 tvDiaryDate.setText(date);
-                getFoodDiary(user_id);
+                getUser(user_id);
             }
         });
 
@@ -229,7 +185,7 @@ public class HomeActivity extends AppCompatActivity {
                 calendar.add(Calendar.DATE, 1);
                 String date = dateFormat.format(calendar.getTime());
                 tvDiaryDate.setText(date);
-                getFoodDiary(user_id);
+                getUser(user_id);
             }
         });
 
@@ -239,7 +195,7 @@ public class HomeActivity extends AppCompatActivity {
                 calendar = Calendar.getInstance();
                 String date = dateFormat.format(calendar.getTime());
                 tvDiaryDate.setText(date);
-                getFoodDiary(user_id);
+                getUser(user_id);
             }
         });
 
@@ -298,9 +254,101 @@ public class HomeActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
+    public void getUser(final String user_id){
+
+        JSONObject userData = new JSONObject();
+        try
+        {
+            userData.put("_id", user_id);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        VolleyRequestContainer.request(Request.Method.POST,
+                "/users/getuser/",
+                userData,
+                HomeActivity.this,
+                new IVolleyRequestCallback() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        System.out.println(result);
+
+                        try {
+                            JSONObject user = result.getJSONObject("userdata");
+
+                            sGender = user.getString("gender");
+                            iAge = user.getInt("age");
+                            dHeight = user.getDouble("height");
+                            dWeight = user.getDouble("weight");
+                            dTargetWeight = user.getDouble("targetweight");
+                            sActivityLevel = user.getString("activitylevel");
+
+                            dProteinRatio = Double.parseDouble(user.getString("proteinratio"));
+                            dCarbsRatio = Double.parseDouble(user.getString("carbsratio"));
+                            dFatRatio = Double.parseDouble(user.getString("fatratio"));
+
+
+                            // Set Daily Calorie Limit
+                            dCalorieGoal = 0;
+
+                    //        sGender = "Male";
+                    //        sActivityLevel = "hard exercise";
+                    //        iAge = 23;
+                    //        dWeight = 74.84; // in kilos
+                    //        dHeight = 178; // in cm
+                            dWeightLossWeekly = dWeight - dTargetWeight;
+
+                            // Formula for calorie limit obtained from: http://www.checkyourhealth.org/eat-healthy/cal_calculator.php
+
+                            // Determining calorie limit for male
+                            if (sGender.equals("Male"))
+                            {
+                                // Formula https://en.wikipedia.org/wiki/Harris–Benedict_equation
+                                BMR = (10 * dWeight) + (6.25 * dHeight) - (5 * iAge) + 5;
+                            }
+
+                            // Determining calorie limit for female
+                            else if (sGender.equals("Female"))
+                            {
+                                BMR = (10 * dWeight) + (6.25 * dHeight) - (5 * iAge) - 161;
+                            }
+
+                            if (sActivityLevel.equals("Little to Non-Active"))
+                                dCalorieGoal = BMR*1.2- dWeightLossWeekly *500;
+                            if (sActivityLevel.equals("Lightly Active"))
+                                dCalorieGoal = BMR*1.375- dWeightLossWeekly *500;
+                            if (sActivityLevel.equals("Moderately Active"))
+                                dCalorieGoal = BMR*1.55- dWeightLossWeekly *500;
+                            if (sActivityLevel.equals("Very Active"))
+                                dCalorieGoal = BMR*1.725- dWeightLossWeekly *500;
+                            if (sActivityLevel.equals("Extremely Active"))
+                                dCalorieGoal = BMR*1.9- dWeightLossWeekly *500;
+
+                            getFoodDiary(user_id);
+
+                        }catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(String result) {
+                        // Failed
+                    }
+                });
+    }
+
 
     public void getFoodDiary(final String user_id)
     {
+
+        dEnergy = 0;
+        dProtein = 0;
+        dCarbs = 0;
+        dFat = 0;
 
         JSONObject jsonFood = new JSONObject();
 
@@ -345,8 +393,6 @@ public class HomeActivity extends AppCompatActivity {
                         }
 
                         mAdapter = new RecyclerViewAdapterHome(jsonArrayFoods, HomeActivity.this, user_id);
-
-                        populateProgressBar();
 
                         getExerciseDiary(user_id);
 
@@ -443,16 +489,14 @@ public class HomeActivity extends AppCompatActivity {
                              e.printStackTrace();
                          }
 
-                         System.out.println(iCaloriesBurned);
-
                          setMacros(dCalorieGoal+iCaloriesBurned);
 
-                        mAdapterExercise = new RecyclerViewAdapterHomeExercise(jsonArrayExercises);
+                         mAdapterExercise = new RecyclerViewAdapterHomeExercise(jsonArrayExercises);
 
-                        concatAdapter = new ConcatAdapter(mAdapter, mAdapterExercise);
-                        rvConcat.setAdapter(concatAdapter);
+                         concatAdapter = new ConcatAdapter(mAdapter, mAdapterExercise);
+                         rvConcat.setAdapter(concatAdapter);
 
-                        populateProgressBar();
+                         populateProgressBar();
 
                     }
 
