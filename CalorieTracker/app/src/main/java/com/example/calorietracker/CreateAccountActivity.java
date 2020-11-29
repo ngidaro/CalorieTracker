@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import user.User;
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -90,6 +92,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                             etPassword.getText().toString(),
                             etEmail.getText().toString(),
                             CreateAccountActivity.this);
+
                 }
 
             }

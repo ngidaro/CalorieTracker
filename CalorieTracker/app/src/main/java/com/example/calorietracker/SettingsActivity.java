@@ -44,12 +44,14 @@ public class SettingsActivity extends AppCompatActivity {
     protected EditText etProteinRatio;
     protected EditText etCarbsRatio;
     protected EditText etFatRatio;
+//    protected EditText etWeeklyWeightLoss;
 
     protected String sGender;
     protected int iAge;
     protected double dHeight;
     protected double dWeight;
     protected double dTargetWeight;
+//    protected double dWeeklyWeightLoss;
     protected String sActivityLevel;
     protected int iProteinRatio;
     protected int iCarbsRatio;
@@ -84,6 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
         etProteinRatio = findViewById(R.id.sa_protein_ratio);
         etCarbsRatio = findViewById(R.id.sa_carbs_ratio);
         etFatRatio = findViewById(R.id.sa_fat_ratio);
+//        etWeeklyWeightLoss = findViewById(R.id.sa_target_weight_loss);
 
         btnSave = findViewById(R.id.sa_save);
         btnLogout = findViewById(R.id.sa_logout);
@@ -139,6 +142,7 @@ public class SettingsActivity extends AppCompatActivity {
                             iProteinRatio = (int) (user.getDouble("proteinratio") * 100);
                             iCarbsRatio = (int) (user.getDouble("carbsratio") * 100);
                             iFatRatio = (int) (user.getDouble("fatratio") * 100);
+ //                           dWeeklyWeightLoss = user.getDouble("weeklyloss");
 
                             populatePage();
 
@@ -173,6 +177,7 @@ public class SettingsActivity extends AppCompatActivity {
         etHeight.setText(Double.toString(dHeight));
         etWeight.setText(Double.toString(dWeight));
         etTargetWeight.setText(Double.toString(dTargetWeight));
+//        etWeeklyWeightLoss.setText(Double.toString(dWeeklyWeightLoss));
 
         etProteinRatio.setText(Integer.toString(iProteinRatio));
         etCarbsRatio.setText(Integer.toString(iCarbsRatio));
@@ -203,13 +208,14 @@ public class SettingsActivity extends AppCompatActivity {
         String sWeight = etWeight.getText().toString();
         String sTargetWeight = etTargetWeight.getText().toString();
         String sActivityLevel = spinActivityLevel.getSelectedItem().toString();
+ //       String sWeeklyWeightLoss = etWeeklyWeightLoss.getText().toString();
 
         String sProteinRatio = etProteinRatio.getText().toString();
         String sCarbsRatio = etCarbsRatio.getText().toString();
         String sFatRatio = etFatRatio.getText().toString();
 
         if (sHeight.equals("") || sWeight.equals("") || sTargetWeight.equals("") || etAge.getText().toString().equals("") ||
-            sProteinRatio.equals("") || sCarbsRatio.equals("") || sFatRatio.equals(""))
+            sProteinRatio.equals("") || sCarbsRatio.equals("") || sFatRatio.equals("")) // || sWeeklyWeightLoss.equals(" "))
         {
             Toast.makeText(SettingsActivity.this, "One or more Empty Fields.", Toast.LENGTH_LONG);
         }
@@ -219,6 +225,7 @@ public class SettingsActivity extends AppCompatActivity {
             double dHeight = Double.parseDouble(sHeight);
             double dWeight = Double.parseDouble(sWeight);
             double dTargetWeight = Double.parseDouble(sTargetWeight);
+ //           double dWeeklyWeightLoss = Double.parseDouble(sWeeklyWeightLoss);
 
             double dProteinRatio = (double) Integer.parseInt(sProteinRatio) / 100;
             double dCarbsRatio = (double) Integer.parseInt(sCarbsRatio) / 100;
@@ -238,6 +245,7 @@ public class SettingsActivity extends AppCompatActivity {
                 jsonUpdatedUser.put("proteinratio", dProteinRatio);
                 jsonUpdatedUser.put("carbsratio", dCarbsRatio);
                 jsonUpdatedUser.put("fatratio", dFatRatio);
+  //              jsonUpdatedUser.put("weeklyloss",dWeeklyWeightLoss);
             }
             catch (JSONException e){
                 e.printStackTrace();
