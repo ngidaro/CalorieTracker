@@ -32,6 +32,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
     protected EditText etHeight;
     protected EditText etWeight;
     protected EditText etTargetWeight;
+//    protected EditText etWeeklyWeightLoss;
     protected Spinner spinActivityLevel;
     protected Button btnContinue;
 
@@ -45,6 +46,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
         etHeight = findViewById(R.id.paa_height);
         etWeight = findViewById(R.id.paa_weight);
         etTargetWeight = findViewById(R.id.paa_target_weight);
+//        etWeeklyWeightLoss = findViewById(R.id.paa_target_weight_loss);
         spinActivityLevel = findViewById(R.id.paa_spin_activity_level);
 
         btnContinue = findViewById(R.id.paa_continue);
@@ -60,6 +62,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
                 String sWeight = etWeight.getText().toString();
                 String sTargetWeight = etTargetWeight.getText().toString();
                 String sActivityLevel = spinActivityLevel.getSelectedItem().toString();
+    //            String sWeeklyWeightLoss = etWeeklyWeightLoss.getText().toString();
 
                 double dProteinRatio = 0.15;
                 double dCarbsRatio = 0.05;
@@ -67,7 +70,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
 
                 final String user_id = getIntent().getStringExtra("_id");
 
-                if (sHeight.equals("") || sWeight.equals("") || sTargetWeight.equals("") || etAge.getText().toString().equals(""))
+                if (sHeight.equals("") || sWeight.equals("") || sTargetWeight.equals("") || etAge.getText().toString().equals("")) // || etWeeklyWeightLoss.equals(""))
                 {
                     Toast.makeText(PopulateAccountActivity.this, "One or more Empty Fields.", Toast.LENGTH_LONG);
                 }
@@ -77,6 +80,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
                     double dHeight = Double.parseDouble(sHeight);
                     double dWeight = Double.parseDouble(sWeight);
                     double dTargetWeight = Double.parseDouble(sTargetWeight);
+              //      double dWeeklyWeightLoss = Double.parseDouble(sWeeklyWeightLoss);
 
                     JSONObject jsonUpdatedUser = new JSONObject();
 
@@ -92,6 +96,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
                         jsonUpdatedUser.put("proteinratio", dProteinRatio);
                         jsonUpdatedUser.put("carbsratio", dCarbsRatio);
                         jsonUpdatedUser.put("fatratio", dFatRatio);
+                //        jsonUpdatedUser.put("weeklyloss",dWeeklyWeightLoss);
                     }
                     catch (JSONException e){
                         e.printStackTrace();
@@ -126,6 +131,13 @@ public class PopulateAccountActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // Prevents user from pressing back into the login screen
+    @Override
+    public void onBackPressed()
+    {
+        moveTaskToBack(true);
     }
 
     public void populateServingSizeSpinner() {

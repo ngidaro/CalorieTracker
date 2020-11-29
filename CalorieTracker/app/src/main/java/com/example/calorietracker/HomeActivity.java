@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,6 +66,7 @@ public class HomeActivity extends AppCompatActivity {
 
     String sGender;
     String sActivityLevel;
+
     double dWeight;
     double dHeight;
     double BMR=0;
@@ -79,6 +81,7 @@ public class HomeActivity extends AppCompatActivity {
     Calendar calendar;
     SimpleDateFormat dateFormat;
     Button btnAddBurntCalories;
+    Button btnCharts;
 
     ProgressBar pbEnergy;
     ProgressBar pbProtein;
@@ -127,6 +130,7 @@ public class HomeActivity extends AppCompatActivity {
         ivDateBack = findViewById(R.id.ha_diary_date_back);
         ivDateForward = findViewById(R.id.ha_diary_date_forward);
         btnAddBurntCalories = findViewById(R.id.ha_add_burnt_calories);
+        btnCharts = findViewById(R.id.ha_charts);
         ivDateToday = findViewById(R.id.ha_today);
 
         calendar = Calendar.getInstance();
@@ -217,6 +221,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        btnCharts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, ChartActivity.class);
+                intent.putExtra("_id",user_id);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -297,7 +310,9 @@ public class HomeActivity extends AppCompatActivity {
                     //        iAge = 23;
                     //        dWeight = 74.84; // in kilos
                     //        dHeight = 178; // in cm
-                            dWeightLossWeekly = dWeight - dTargetWeight;
+                    //        dWeightLossWeekly = dWeight - dTargetWeight;
+                    //        dWeightLossWeekly = user.getDouble("weeklyloss");
+                            dWeightLossWeekly = 1.5;
 
                             // Formula for calorie limit obtained from: http://www.checkyourhealth.org/eat-healthy/cal_calculator.php
 
@@ -433,18 +448,26 @@ public class HomeActivity extends AppCompatActivity {
         tvEnergyValue.setText(String.format("%.1f", dEnergy));
         pbEnergy.setProgress((int)dEnergy);
         tvEnergyPercent.setText(String.format("%.0f", (dEnergy/ dCalorieGoal)*100) + " %");
+        if (dEnergy>dCalorieGoal)
+            tvEnergyPercent.setTextColor(Color.RED);
 
         tvProteinValue.setText(String.format("%.1f", dProtein));
         pbProtein.setProgress((int)dProtein);
         tvProteinPercent.setText(String.format("%.0f", (dProtein/ dProteinGoal)*100) + " %");
+        if (dProtein>dProteinGoal)
+            tvProteinPercent.setTextColor(Color.RED);
 
         tvCarbsValue.setText(String.format("%.1f", dCarbs));
         pbCarbs.setProgress((int)(dCarbs));
         tvCarbsPercent.setText(String.format("%.0f", ((dCarbs)/ dCarbsGoal)*100) + " %");
+        if (dCarbs>dCarbsGoal)
+            tvCarbsPercent.setTextColor(Color.RED);
 
         tvFatValue.setText(String.format("%.1f", dFat));
         pbFat.setProgress((int)dFat);
         tvFatPercent.setText(String.format("%.0f", (dFat/ dFatGoal)*100) + " %");
+        if (dFat>dFatGoal)
+            tvFatPercent.setTextColor(Color.RED);
 
     }
 
@@ -490,6 +513,7 @@ public class HomeActivity extends AppCompatActivity {
                          }
 
                          setMacros(dCalorieGoal+iCaloriesBurned);
+                         dEnergy-=iCaloriesBurned;
 
                          mAdapterExercise = new RecyclerViewAdapterHomeExercise(jsonArrayExercises);
 

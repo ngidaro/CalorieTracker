@@ -34,22 +34,21 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Temporary for dev purposes
-                User.getUser("ngidaro",
-                        "123",
-                        LoginActivity.this);
+//                User.getUser("ngidaro",
+//                        "123",
+ //                       LoginActivity.this);
 
-//                if(etUsername.getText().toString().equals("") ||
-//                   etPassword.getText().toString().equals(""))
-//                {
-//                    // One or more fields are empty
-//                }
-//                else {
-//
-//                    User.getUser(etUsername.getText().toString(),
-//                            etPassword.getText().toString(),
-//                            LoginActivity.this);
-//
-//                }
+                if(etUsername.getText().toString().equals("") ||
+                   etPassword.getText().toString().equals(""))
+                {
+                    // One or more fields are empty
+                }
+                else {
+                    User.getUser(etUsername.getText().toString(),
+                            etPassword.getText().toString(),
+                            LoginActivity.this);
+
+                }
             }
         });
 
