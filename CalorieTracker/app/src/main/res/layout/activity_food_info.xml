@@ -55,7 +55,7 @@
             android:padding="8dp"
             android:layout_gravity="top"
             android:textAlignment="center"
-            android:inputType="number"
+            android:inputType="numberSigned|numberDecimal"
             tools:ignore="RtlCompat" />
 
     </LinearLayout>

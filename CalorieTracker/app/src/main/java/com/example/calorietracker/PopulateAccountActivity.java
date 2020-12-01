@@ -1,7 +1,6 @@
 package com.example.calorietracker;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ConcatAdapter;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,13 +15,9 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.example.calorietracker.volley.VolleyRequestContainer;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-import CustomAdapters.RecyclerViewAdapterHomeExercise;
 import callbacks.IVolleyRequestCallback;
 
 public class PopulateAccountActivity extends AppCompatActivity {
@@ -31,7 +26,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
     protected EditText etAge;
     protected EditText etHeight;
     protected EditText etWeight;
-    protected EditText etTargetWeight;
+    protected EditText etWeightLossWeekly;
     protected Spinner spinActivityLevel;
     protected Button btnContinue;
 
@@ -44,7 +39,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
         etAge = findViewById(R.id.paa_age);
         etHeight = findViewById(R.id.paa_height);
         etWeight = findViewById(R.id.paa_weight);
-        etTargetWeight = findViewById(R.id.paa_target_weight);
+        etWeightLossWeekly = findViewById(R.id.paa_weight_loss_weekly);
         spinActivityLevel = findViewById(R.id.paa_spin_activity_level);
 
         btnContinue = findViewById(R.id.paa_continue);
@@ -58,7 +53,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
                 String sGender = spinGender.getSelectedItem().toString();
                 String sHeight = etHeight.getText().toString();
                 String sWeight = etWeight.getText().toString();
-                String sTargetWeight = etTargetWeight.getText().toString();
+                String sWeightLossWeekly = etWeightLossWeekly.getText().toString();
                 String sActivityLevel = spinActivityLevel.getSelectedItem().toString();
 
                 double dProteinRatio = 0.15;
@@ -67,7 +62,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
 
                 final String user_id = getIntent().getStringExtra("_id");
 
-                if (sHeight.equals("") || sWeight.equals("") || sTargetWeight.equals("") || etAge.getText().toString().equals(""))
+                if (sHeight.equals("") || sWeight.equals("") || sWeightLossWeekly.equals("") || etAge.getText().toString().equals(""))
                 {
                     Toast.makeText(PopulateAccountActivity.this, "One or more Empty Fields.", Toast.LENGTH_LONG);
                 }
@@ -76,7 +71,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
                     int iAge = Integer.parseInt(etAge.getText().toString());
                     double dHeight = Double.parseDouble(sHeight);
                     double dWeight = Double.parseDouble(sWeight);
-                    double dTargetWeight = Double.parseDouble(sTargetWeight);
+                    double dWeightLossWeekly = Double.parseDouble(sWeightLossWeekly);
 
                     JSONObject jsonUpdatedUser = new JSONObject();
 
@@ -87,7 +82,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
                         jsonUpdatedUser.put("age", iAge);
                         jsonUpdatedUser.put("height", dHeight);
                         jsonUpdatedUser.put("weight", dWeight);
-                        jsonUpdatedUser.put("targetweight", dTargetWeight);
+                        jsonUpdatedUser.put("weightlossweekly", dWeightLossWeekly);
                         jsonUpdatedUser.put("activitylevel", sActivityLevel);
                         jsonUpdatedUser.put("proteinratio", dProteinRatio);
                         jsonUpdatedUser.put("carbsratio", dCarbsRatio);
@@ -106,8 +101,6 @@ public class PopulateAccountActivity extends AppCompatActivity {
                                 @SuppressLint({"SetTextI18n", "DefaultLocale"})
                                 @Override
                                 public void onSuccess(JSONObject result) {
-
-
 
                                     Intent intent = new Intent(PopulateAccountActivity.this, HomeActivity.class);
                                     intent.putExtra("_id",user_id);

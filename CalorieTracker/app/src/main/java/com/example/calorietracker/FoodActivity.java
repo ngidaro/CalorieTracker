@@ -93,7 +93,7 @@ public class FoodActivity extends AppCompatActivity {
 //                                        System.out.println(result.toString());
                                     JSONArray res = result.getJSONArray("foods");
 
-                                    mAdapter = new RecyclerViewAdapter(res, FoodActivity.this, user_id);
+                                    mAdapter = new RecyclerViewAdapter(res, FoodActivity.this, user_id, "");
                                     recyclerView.setAdapter(mAdapter);
 
                                 }catch (JSONException e){

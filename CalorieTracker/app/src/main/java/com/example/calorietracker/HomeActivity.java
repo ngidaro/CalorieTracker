@@ -68,7 +68,6 @@ public class HomeActivity extends AppCompatActivity {
     double dWeight;
     double dHeight;
     double BMR=0;
-    double dTargetWeight;
     double dWeightLossWeekly;
     int iAge;
 
@@ -281,7 +280,7 @@ public class HomeActivity extends AppCompatActivity {
                             iAge = user.getInt("age");
                             dHeight = user.getDouble("height");
                             dWeight = user.getDouble("weight");
-                            dTargetWeight = user.getDouble("targetweight");
+                            dWeightLossWeekly = user.getDouble("weightlossweekly");
                             sActivityLevel = user.getString("activitylevel");
 
                             dProteinRatio = Double.parseDouble(user.getString("proteinratio"));
@@ -297,7 +296,6 @@ public class HomeActivity extends AppCompatActivity {
                     //        iAge = 23;
                     //        dWeight = 74.84; // in kilos
                     //        dHeight = 178; // in cm
-                            dWeightLossWeekly = dWeight - dTargetWeight;
 
                             // Formula for calorie limit obtained from: http://www.checkyourhealth.org/eat-healthy/cal_calculator.php
 

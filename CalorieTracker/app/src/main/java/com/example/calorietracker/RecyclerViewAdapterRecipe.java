@@ -1,47 +1,44 @@
 package CustomAdapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import com.example.calorietracker.FoodInfoActivity;
+import com.example.calorietracker.AddIngredientActivity;
 import com.example.calorietracker.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.customViewHolder> {
+public class RecyclerViewAdapterRecipe extends RecyclerView.Adapter<RecyclerViewAdapterRecipe.customViewHolder> {
 
     private JSONArray mData;
     private Context applicationContext;
-    private String user_id;
-    private String recipe_id;
 
     public static class customViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvFoodInfo;
+        public LinearLayout llRecipeView;
+        public TextView tvRecipeName;
 
         public customViewHolder(View itemView) {
             super(itemView);
-            tvFoodInfo = itemView.findViewById(R.id.rv_search_food);
+            llRecipeView = itemView.findViewById(R.id.rv_recipe_container);
+            tvRecipeName = itemView.findViewById(R.id.rv_recipe_name);
         }
     }
 
     // Default Constructor
-    public RecyclerViewAdapter(JSONArray data, Context applicationContext, String _id, String recipe_id) {
+    public RecyclerViewAdapterRecipe(JSONArray data, Context applicationContext) {
         this.mData = data;
         this.applicationContext = applicationContext;
-        this.user_id = _id;
-        this.recipe_id = recipe_id;
-
     }
 
     @Override
@@ -49,7 +46,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                                                int viewType) {
         // Creating a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.rv_search_items, parent, false);
+                .inflate(R.layout.rv_recipes, parent, false);
 
         customViewHolder viewHolder = new customViewHolder(v);
         return viewHolder;
@@ -60,44 +57,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(customViewHolder holder, int position) {
 
         JSONObject foodObj = null;
-        String sFoodInfo = "";
 
         try {
             foodObj = (JSONObject) mData.get(position);
 
-            while(!foodObj.has("brandOwner")){
-                position++;
-                foodObj = (JSONObject) mData.get(position);
-            }
-
-//            if(!foodObj.has("brandOwner")){
-////                sFoodInfo = foodObj.getString("description") + ", No Brand Owner";
-//            }
-//            else{
-
-            sFoodInfo = foodObj.getString("description") + ", " + foodObj.getString("brandOwner");
-
-            holder.tvFoodInfo.setText(sFoodInfo);
+            holder.tvRecipeName.setText(foodObj.getString("recipename"));
 
             final JSONObject finalFoodObj = foodObj;
-            holder.tvFoodInfo.setOnClickListener(new View.OnClickListener() {
+            holder.llRecipeView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(applicationContext, FoodInfoActivity.class);
+                    // Go to the recipe ingredients
+                    Intent intent = new Intent(applicationContext, AddIngredientActivity.class);
                     try {
-
-                        intent.putExtra("fdcId", finalFoodObj.getString("fdcId"));
-                        intent.putExtra("_id", user_id);
-                        intent.putExtra("recipe_id", recipe_id);
-                        intent.putExtra("prevViewName", applicationContext.getClass().getSimpleName());
-                        applicationContext.startActivity(intent);
-
+                        intent.putExtra("_id",finalFoodObj.getString("userid"));
+                        intent.putExtra("recipe_id", finalFoodObj.getString("_id"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+                    applicationContext.startActivity(intent);
                 }
             });
-
 
         } catch (JSONException e) {
             e.printStackTrace();

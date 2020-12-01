@@ -138,7 +138,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Target Weight (kg)"
+            android:text="Weight Loss Weekly (kg)"
             android:textColor="#000000"
             android:textSize="20dp"
             android:padding="8dp"
@@ -146,14 +146,14 @@
             android:layout_weight="1"/>
 
         <EditText
-            android:id="@+id/paa_target_weight"
+            android:id="@+id/paa_weight_loss_weekly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Weight"
             android:layout_weight="2"
             android:layout_gravity="center"
             android:gravity="center"
-            android:inputType="number"/>
+            android:inputType="numberSigned|numberDecimal"/>
 
     </LinearLayout>
 

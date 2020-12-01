@@ -1,7 +1,6 @@
 package com.example.calorietracker;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,15 +8,11 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
-import com.example.calorietracker.navigator.ActivityNavigator;
 import com.example.calorietracker.volley.VolleyRequestContainer;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,64 +21,30 @@ import org.json.JSONObject;
 import CustomAdapters.RecyclerViewAdapter;
 import callbacks.IVolleyRequestCallback;
 
-public class ScaleInputActivity extends AppCompatActivity {
+public class AddFoodActivity extends AppCompatActivity {
+
+    EditText etSearch;
+    TextView tvRecentResult;
 
     protected RecyclerView recyclerView;
     protected RecyclerView.Adapter mAdapter;
     protected RecyclerView.LayoutManager layoutManager;
 
-    EditText etSearch;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scale_input);
+        setContentView(R.layout.activity_add_food);
 
         final String user_id = getIntent().getStringExtra("_id");
+        final String recipe_id = getIntent().getStringExtra("recipe_id");
 
-        // Code to Switch Activities
-
-        LinearLayout llHomeTab    = findViewById(R.id.tbar_home);
-        LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
-        LinearLayout llSettingsTab = findViewById(R.id.tbar_settings);
-        LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
-        FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
-
-        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llSettingsTab, llRecipeTab, llFloatingButton);
+        etSearch = findViewById(R.id.afa_search);
+        tvRecentResult = findViewById(R.id.afa_rec_res);
 
         // Setting the RecyclerView
-        recyclerView = findViewById(R.id.isa_search_rv);
+        recyclerView = findViewById(R.id.afa_search_rv);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        etSearch = findViewById(R.id.isa_search);
-
-        displaySearchFields(user_id);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        //Inflate the menu
-        getMenuInflater().inflate(R.menu.addfoodmenu, menu);
-        return true;
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    public void displaySearchFields(final String user_id){
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -95,6 +56,9 @@ public class ScaleInputActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void afterTextChanged(Editable s) {
+
+                // When food is being searched, change text from recent to results
+                tvRecentResult.setText("Results");
 
                 JSONObject jsonSearch = new JSONObject();
                 try
@@ -109,7 +73,7 @@ public class ScaleInputActivity extends AppCompatActivity {
                         Request.Method.POST,
                         "/food/",
                         jsonSearch,
-                        ScaleInputActivity.this,
+                        AddFoodActivity.this,
                         new IVolleyRequestCallback() {
                             @Override
                             public void onSuccess(JSONObject result) {
@@ -117,7 +81,7 @@ public class ScaleInputActivity extends AppCompatActivity {
 //                                        System.out.println(result.toString());
                                     JSONArray res = result.getJSONArray("foods");
 
-                                    mAdapter = new RecyclerViewAdapter(res, ScaleInputActivity.this, user_id, "");
+                                    mAdapter = new RecyclerViewAdapter(res, AddFoodActivity.this, user_id, recipe_id);
                                     recyclerView.setAdapter(mAdapter);
 
                                 }catch (JSONException e){

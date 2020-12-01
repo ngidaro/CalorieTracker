@@ -6,26 +6,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MyRecipesActivity"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Your Recipes"
-        android:textStyle="bold"
-        android:textSize="28dp"/>
+        android:padding="16dp"
+        android:background="#89cff0"
+        android:gravity="center">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/yra_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"/>
 
-    <ListView
-        android:id="@+id/recipes"
+        <TextView
+            android:text="My Recipes"
+            android:textSize="24dp"
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="24dp"/>
+
+    </LinearLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-</ScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/yra_recipes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </ScrollView>
 
 
 </LinearLayout>

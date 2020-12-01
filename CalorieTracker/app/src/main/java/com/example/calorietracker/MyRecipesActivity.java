@@ -1,90 +1,97 @@
 package com.example.calorietracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
+import com.android.volley.Request;
+import com.example.calorietracker.volley.VolleyRequestContainer;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import CustomAdapters.RecyclerViewAdapterRecipe;
+import callbacks.IVolleyRequestCallback;
 
 public class MyRecipesActivity extends AppCompatActivity {
 
-    protected ListView myRecipes;
+    protected RecyclerView recyclerView;
+    protected RecyclerView.Adapter mAdapter;
+    protected RecyclerView.LayoutManager layoutManager;
 
+    protected ImageView ivExit;
+
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_recipe);
 
-        myRecipes = findViewById(R.id.recipes);
-        loadRecipes();
+        final String user_id = getIntent().getStringExtra("_id");
+
+        recyclerView = findViewById(R.id.yra_recipes);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        ivExit = findViewById(R.id.yra_exit);
+
+        ivExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        getRecipes(user_id);
+
     }
 
-    public void loadRecipes() {
+    public void getRecipes(final String user_id)
+    {
+        JSONObject jsonRecipe = new JSONObject();
+        try
+        {
+            jsonRecipe.put("user_id", user_id);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
 
+        VolleyRequestContainer.request(
+                Request.Method.POST,
+                "/recipe/getuserrecipes",
+                jsonRecipe,
+                MyRecipesActivity.this,
+                new IVolleyRequestCallback() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        try {
 
-        String recipe_name = "Fruit Salad";
-        ArrayList<String> recipeIngredients = new ArrayList<String>();
+                            JSONArray jsonRecipes = result.getJSONArray("recipes");
 
-        recipeIngredients.add("Apple");
-        recipeIngredients.add("Banana");
-        recipeIngredients.add("Mango");
+                            //Populate the recycler view with the ingredients
+                            mAdapter = new RecyclerViewAdapterRecipe(jsonRecipes, MyRecipesActivity.this);
+                            recyclerView.setAdapter(mAdapter);
 
-        final Recipe recipe = new Recipe(recipe_name, recipeIngredients);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
 
-        String instruction1 = "Cut Apple";
-        ArrayList<String> step1Ingredients = new ArrayList<String>();
-        step1Ingredients.add("Apple");
-
-        String instruction2 = "Cut Banana";
-        ArrayList<String> step2Ingredients = new ArrayList<String>();
-        step2Ingredients.add("Banana");
-
-        String instruction3 = "Cut Mango";
-        ArrayList<String> step3Ingredients = new ArrayList<String>();
-        step3Ingredients.add("Mango");
-
-        String instruction4 = "Mix together";
-        ArrayList<String> step4Ingredients = new ArrayList<String>();
-        step4Ingredients.add("Apple");
-        step4Ingredients.add("Banana");
-        step4Ingredients.add("Mango");
-
-
-        Step step = new Step(recipe,step1Ingredients,0,5,0,instruction1);
-        Step step2 = new Step(recipe,step2Ingredients,0,1,0,instruction2);
-        Step step3 = new Step(recipe,step3Ingredients,0,3,0,instruction3);
-        Step step4 = new Step(recipe,step4Ingredients,0,1,0,instruction4);
-
-        ArrayList<Step> steps = new ArrayList<>();
-        steps.add(step);
-        steps.add(step2);
-        steps.add(step3);
-        steps.add(step4);
-
-        recipe.setRecipeSteps(steps);
-
-        ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-        recipes.add(recipe);
-
-
-        RecipeAdapter adapter = new RecipeAdapter(this, R.layout.recipe_info, recipes);
-        myRecipes.setAdapter(adapter);
-
-        myRecipes.setClickable(true);
-
-        myRecipes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MyRecipesActivity.this,YourRecipeActivity.class);
-                startActivity(intent);
-            }
-
-        });
+                    @Override
+                    public void onFailure(String result) {
+                        // Failed
+                    }
+                });
     }
 }
