@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.example.calorietracker.HomeActivity;
+import com.example.calorietracker.InitiateBluetooth;
 import com.example.calorietracker.PopulateAccountActivity;
 import com.example.calorietracker.volley.VolleyRequestContainer;
 
@@ -42,7 +43,7 @@ public class User {
                             System.out.println(result);
                             String token = result.getString("token");
 
-                            Intent intent = new Intent(applicationContext, HomeActivity.class);
+                            Intent intent = new Intent(applicationContext, InitiateBluetooth.class);
                             intent.putExtra("username", username);
                             intent.putExtra("_id", result.getString("_id"));
                             applicationContext.startActivity(intent);

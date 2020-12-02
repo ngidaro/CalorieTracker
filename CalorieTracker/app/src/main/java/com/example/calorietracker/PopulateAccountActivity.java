@@ -102,7 +102,7 @@ public class PopulateAccountActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(JSONObject result) {
 
-                                    Intent intent = new Intent(PopulateAccountActivity.this, HomeActivity.class);
+                                    Intent intent = new Intent(PopulateAccountActivity.this, InitiateBluetooth.class);
                                     intent.putExtra("_id",user_id);
                                     startActivity(intent);
 

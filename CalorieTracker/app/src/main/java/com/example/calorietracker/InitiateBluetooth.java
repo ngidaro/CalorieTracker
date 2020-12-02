@@ -42,9 +42,15 @@ public class InitiateBluetooth extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final String user_id = getIntent().getStringExtra("_id");
+
         //initializing the xml file to the main code
         myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();  //get default adapter
         ToggleBluetooth();
+
+        Intent intent = new Intent(InitiateBluetooth.this, HomeActivity.class);
+        intent.putExtra("_id",user_id);
+        startActivity(intent);
     }
 
     void ToggleBluetooth()
