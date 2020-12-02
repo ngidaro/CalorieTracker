@@ -28,7 +28,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".AddRecipeActivity"></activity>
+        <activity android:name=".InitiateBluetooth"></activity>
+        <activity android:name=".AddRecipeActivity" />
         <activity android:name=".AddFoodActivity" />
         <activity android:name=".PopulateAccountActivity" />
         <activity android:name=".CaloriesBurnedActivity" />

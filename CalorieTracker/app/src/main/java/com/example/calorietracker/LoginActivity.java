@@ -2,12 +2,14 @@ package com.example.calorietracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import user.User;
 
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         tvCreateAccount = findViewById(R.id.log_create_account);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ShowToast")
             @Override
             public void onClick(View v) {
 
@@ -41,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(etUsername.getText().toString().equals("") ||
                    etPassword.getText().toString().equals(""))
                 {
-                    // One or more fields are empty
+                    Toast.makeText(LoginActivity.this, "One or more fields are empty", Toast.LENGTH_LONG).show();
                 }
                 else {
 

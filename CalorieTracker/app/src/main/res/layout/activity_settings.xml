@@ -24,328 +24,341 @@
         android:layout_weight="1"
         android:gravity="center"/>
 
-</LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:background="#ffffff"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="3"
-        android:background="#ffffff"
-        android:layout_gravity="center"
-        android:layout_marginTop="2dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Gender"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:padding="8dp"
-            android:layout_weight="2"/>
-
-        <Spinner
-            android:id="@+id/sa_spin_gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="right"
-            android:padding="8dp"/>
 
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        android:background="#ffffff"
-        android:layout_marginTop="1dp">
+        android:layout_height="wrap_content" >
 
-        <TextView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Age"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:padding="8dp"
-            android:layout_weight="2"/>
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/sa_age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Age"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:inputType="number"
-            android:background="@android:color/transparent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Profile"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:background="#ffffff"/>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:background="#ffffff"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        android:background="#ffffff"
-        android:layout_marginTop="1dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:padding="8dp"
+                    android:layout_weight="2"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Height (cm)"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:padding="8dp"
-            android:layout_weight="2"/>
+                <Spinner
+                    android:id="@+id/sa_spin_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:padding="8dp"/>
 
-        <EditText
-            android:id="@+id/sa_height"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Height"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:inputType="number"
-            android:background="@android:color/transparent"/>
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="#ffffff"
+                android:layout_marginTop="1dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        android:background="#ffffff"
-        android:layout_marginTop="1dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Age"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:padding="8dp"
+                    android:layout_weight="2"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Weight (kg)"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:padding="8dp"
-            android:layout_weight="2"/>
+                <EditText
+                    android:id="@+id/sa_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Age"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:background="@android:color/transparent"/>
 
-        <EditText
-            android:id="@+id/sa_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Weight"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:inputType="number"
-            android:background="@android:color/transparent"/>
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="#ffffff"
+                android:layout_marginTop="1dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        android:background="#ffffff"
-        android:layout_marginTop="1dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Height (cm)"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:padding="8dp"
+                    android:layout_weight="2"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Weekly Weight Loss (kg)"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:padding="8dp"
-            android:layout_weight="2"/>
+                <EditText
+                    android:id="@+id/sa_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Height"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:background="@android:color/transparent"/>
 
-        <EditText
-            android:id="@+id/sa_weight_loss_weekly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Weight"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:inputType="numberSigned|numberDecimal"
-            android:background="@android:color/transparent"/>
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="#ffffff"
+                android:layout_marginTop="1dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:weightSum="3"
-        android:background="#ffffff"
-        android:layout_marginTop="1dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Weight (kg)"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:padding="8dp"
+                    android:layout_weight="2"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Activity Level"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:padding="8dp"
-            android:layout_weight="2"/>
+                <EditText
+                    android:id="@+id/sa_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Weight"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:background="@android:color/transparent"/>
 
-        <Spinner
-            android:id="@+id/sa_spin_activity_level"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="right"
-            android:padding="8dp"/>
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="#ffffff"
+                android:layout_marginTop="1dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Macronutrients Target"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:padding="8dp"
-        android:background="#ffffff"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Weekly Weight Loss (kg)"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:padding="8dp"
+                    android:layout_weight="2"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        android:background="#ffffff"
-        android:layout_marginTop="2dp">
+                <EditText
+                    android:id="@+id/sa_weight_loss_weekly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Weight"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="numberSigned|numberDecimal"
+                    android:background="@android:color/transparent"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Protein Ratio (%)"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:padding="8dp"
-            android:layout_weight="2"/>
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/sa_protein_ratio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="%"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:inputType="number"
-            android:background="@android:color/transparent"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:weightSum="3"
+                android:background="#ffffff"
+                android:layout_marginTop="1dp">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Activity Level"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:padding="8dp"
+                    android:layout_weight="2"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        android:background="#ffffff"
-        android:layout_marginTop="1dp">
+                <Spinner
+                    android:id="@+id/sa_spin_activity_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:padding="8dp"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Carbs Ratio (%)"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:padding="8dp"
-            android:layout_weight="2"/>
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/sa_carbs_ratio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="%"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:inputType="number"
-            android:background="@android:color/transparent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Macronutrients Target"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:padding="8dp"
+                android:background="#ffffff"/>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="#ffffff"
+                android:layout_marginTop="2dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        android:background="#ffffff"
-        android:layout_marginTop="1dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Protein Ratio (%)"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:padding="8dp"
+                    android:layout_weight="2"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Fat Ratio (%)"
-            android:textColor="#000000"
-            android:textSize="20dp"
-            android:padding="8dp"
-            android:layout_weight="2"/>
+                <EditText
+                    android:id="@+id/sa_protein_ratio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="%"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:background="@android:color/transparent"/>
 
-        <EditText
-            android:id="@+id/sa_fat_ratio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="%"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:inputType="number"
-            android:background="@android:color/transparent"/>
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="#ffffff"
+                android:layout_marginTop="1dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:weightSum="8"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="#00f2f2f2">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Carbs Ratio (%)"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:padding="8dp"
+                    android:layout_weight="2"/>
 
-        <Button
-            android:id="@+id/sa_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:backgroundTint="#4169E1"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_weight="1"/>
+                <EditText
+                    android:id="@+id/sa_carbs_ratio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="%"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:background="@android:color/transparent"/>
 
-        <Button
-            android:id="@+id/sa_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logout"
-            android:backgroundTint="#FF0000"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginLeft="100dp"
-            android:layout_weight="1"/>
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:background="#ffffff"
+                android:layout_marginTop="1dp">
 
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Fat Ratio (%)"
+                    android:textColor="#000000"
+                    android:textSize="20dp"
+                    android:padding="8dp"
+                    android:layout_weight="2"/>
+
+                <EditText
+                    android:id="@+id/sa_fat_ratio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="%"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:background="@android:color/transparent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:weightSum="8"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="#00f2f2f2">
+
+                <Button
+                    android:id="@+id/sa_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:backgroundTint="#4169E1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/sa_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    android:backgroundTint="#FF0000"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="100dp"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"

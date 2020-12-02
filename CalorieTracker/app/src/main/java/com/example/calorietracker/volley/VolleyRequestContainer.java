@@ -43,6 +43,7 @@ public class VolleyRequestContainer {
                     public void onErrorResponse(VolleyError error) {
                         // TODO: Handle error
                         System.out.println("Something went wrong");
+                        callback.onFailure(error.getMessage());
                     }
                 });
 

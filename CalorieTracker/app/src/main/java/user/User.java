@@ -2,6 +2,7 @@ package user;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.example.calorietracker.HomeActivity;
@@ -104,6 +105,8 @@ public class User {
                     @Override
                     public void onFailure(String result) {
                         // Failed
+                        System.out.println(result);
+                        Toast.makeText(applicationContext, "Username already taken", Toast.LENGTH_LONG).show();
                     }
                 });
     }

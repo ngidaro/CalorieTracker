@@ -77,9 +77,9 @@ public class FoodInfoActivity extends AppCompatActivity {
         final String prevApplicationContext = getIntent().getStringExtra("prevViewName");
 
         ivFoodScale = findViewById(R.id.fia_weight_btn);
-        myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();  //get default adapter
-
-        ToggleBluetooth();
+//        myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();  //get default adapter
+//
+//        ToggleBluetooth();
 
         assert prevApplicationContext != null;
         if(prevApplicationContext.equals("AddFoodActivity"))
@@ -110,6 +110,8 @@ public class FoodInfoActivity extends AppCompatActivity {
                 {
                     Log.d(TAG, "getWeight(): Something went wrong ");
                 }
+
+                etAmount = (EditText) InitiateBluetooth.messageReceived.getText();
             }
         });
 
@@ -376,81 +378,81 @@ public class FoodInfoActivity extends AppCompatActivity {
                 });
 
     }
-
-    void ToggleBluetooth()
-    {
-        Log.d(TAG, "checkUserBT: Checking if BT is on");
-        if(!myBluetoothAdapter.isEnabled()) //checks to see if BT is turned off
-        {
-            Log.d(TAG, "checkUserBT: Turning on BT");
-            Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBTIntent, REQUEST_ENABLE_BT);
-            //will only send the signal to turn on BT if when you open the code and it is off
-        }
-        else
-        {
-            Log.d(TAG, "checkUserBT: BT is already on");
-            initiateBluetoothProcess();
-            Log.d(TAG, "checkUserBT: Stating initiateBluetoothProcess();");
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == REQUEST_ENABLE_BT)
-        {
-            initiateBluetoothProcess();
-        }
-    }
-
-    public void initiateBluetoothProcess() {
-        Log.d(TAG, "initiateBluetoothProcess: Starting");
-        if (myBluetoothAdapter.isEnabled()) {
-            Log.d(TAG, "initiateBluetoothProcess: Attempt to connect to bluetooth module");
-            //attempt to connect to bluetooth module
-            BluetoothSocket tmp = null;
-            bluetoothDevice = myBluetoothAdapter.getRemoteDevice(MODULE_MAC);
-            //will get the BT device using the hardware address (since it is known)
-            try {
-                Log.d(TAG, "initiateBluetoothProcess: Creating a socket");
-                tmp = bluetoothDevice.createRfcommSocketToServiceRecord(MY_UUID);
-                //will open communication with the BT device
-                mySocket = tmp;
-                mySocket.connect(); //connects to the BT device
-                Log.d(TAG, "initiateBluetoothProcess: Connected to: " + bluetoothDevice.getName());
-            }
-            catch (IOException e)
-            {
-                Log.d(TAG, "initiateBluetoothProcess: Catching exception: " + e.getMessage());
-                try {
-                    Log.d(TAG, "initiateBluetoothProcess: Attempting to close socket");
-                    mySocket.close();
-                } catch (IOException c) {
-                    Log.d(TAG, "initiateBluetoothProcess: Failed to close socket");
-                    return;
-                }
-            }
-        }
-
-        mHandler = new Handler(Looper.getMainLooper())
-        {
-            @Override
-            public void handleMessage(Message msg)
-            {
-                if(msg.what == ConnectedThread.RESPONSE_MESSAGE)    //makes sure that it matches
-                {
-                    String txt = (String) msg.obj;
-
-                    etAmount.setText(txt);
-                }
-            }
-        };
-        Log.d(TAG, "initiateBluetoothProcess: Creating and Running thread");
-        connectedThread = new ConnectedThread(mySocket, mHandler);
-        //create the ConnectedThread object using the socket and the handler
-        connectedThread.start();    //initiates the connected thread
-    }
+//
+//    void ToggleBluetooth()
+//    {
+//        Log.d(TAG, "checkUserBT: Checking if BT is on");
+//        if(!myBluetoothAdapter.isEnabled()) //checks to see if BT is turned off
+//        {
+//            Log.d(TAG, "checkUserBT: Turning on BT");
+//            Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//            startActivityForResult(enableBTIntent, REQUEST_ENABLE_BT);
+//            //will only send the signal to turn on BT if when you open the code and it is off
+//        }
+//        else
+//        {
+//            Log.d(TAG, "checkUserBT: BT is already on");
+//            initiateBluetoothProcess();
+//            Log.d(TAG, "checkUserBT: Stating initiateBluetoothProcess();");
+//        }
+//    }
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+//    {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(resultCode == RESULT_OK && requestCode == REQUEST_ENABLE_BT)
+//        {
+//            initiateBluetoothProcess();
+//        }
+//    }
+//
+//    public void initiateBluetoothProcess() {
+//        Log.d(TAG, "initiateBluetoothProcess: Starting");
+//        if (myBluetoothAdapter.isEnabled()) {
+//            Log.d(TAG, "initiateBluetoothProcess: Attempt to connect to bluetooth module");
+//            //attempt to connect to bluetooth module
+//            BluetoothSocket tmp = null;
+//            bluetoothDevice = myBluetoothAdapter.getRemoteDevice(MODULE_MAC);
+//            //will get the BT device using the hardware address (since it is known)
+//            try {
+//                Log.d(TAG, "initiateBluetoothProcess: Creating a socket");
+//                tmp = bluetoothDevice.createRfcommSocketToServiceRecord(MY_UUID);
+//                //will open communication with the BT device
+//                mySocket = tmp;
+//                mySocket.connect(); //connects to the BT device
+//                Log.d(TAG, "initiateBluetoothProcess: Connected to: " + bluetoothDevice.getName());
+//            }
+//            catch (IOException e)
+//            {
+//                Log.d(TAG, "initiateBluetoothProcess: Catching exception: " + e.getMessage());
+//                try {
+//                    Log.d(TAG, "initiateBluetoothProcess: Attempting to close socket");
+//                    mySocket.close();
+//                } catch (IOException c) {
+//                    Log.d(TAG, "initiateBluetoothProcess: Failed to close socket");
+//                    return;
+//                }
+//            }
+//        }
+//
+//        mHandler = new Handler(Looper.getMainLooper())
+//        {
+//            @Override
+//            public void handleMessage(Message msg)
+//            {
+//                if(msg.what == ConnectedThread.RESPONSE_MESSAGE)    //makes sure that it matches
+//                {
+//                    String txt = (String) msg.obj;
+//
+//                    etAmount.setText(txt);
+//                }
+//            }
+//        };
+//        Log.d(TAG, "initiateBluetoothProcess: Creating and Running thread");
+//        connectedThread = new ConnectedThread(mySocket, mHandler);
+//        //create the ConnectedThread object using the socket and the handler
+//        connectedThread.start();    //initiates the connected thread
+//    }
 
 }
