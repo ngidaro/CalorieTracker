@@ -99,19 +99,19 @@ public class FoodInfoActivity extends AppCompatActivity {
         ivFoodScale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mySocket.isConnected() && connectedThread != null)
+                if (InitiateBluetooth.mySocket.isConnected() && InitiateBluetooth.connectedThread != null)
                 {
                     //when you click the button, it will send the characters GW to BT device
                     String  sendText = "GW";
                     Log.d(TAG, "getWeight(): telling the bluetooth to send data");
-                    connectedThread.write(sendText.getBytes());
+                    InitiateBluetooth.connectedThread.write(sendText.getBytes());
                 }
                 else
                 {
                     Log.d(TAG, "getWeight(): Something went wrong ");
                 }
 
-                etAmount = (EditText) InitiateBluetooth.messageReceived.getText();
+                etAmount.setText(InitiateBluetooth.text);
             }
         });
 

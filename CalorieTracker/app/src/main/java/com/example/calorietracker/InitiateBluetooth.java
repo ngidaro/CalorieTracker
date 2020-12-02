@@ -29,12 +29,13 @@ public class InitiateBluetooth extends AppCompatActivity {
     //the UUID for the HC05 BT module
     public final static int REQUEST_ENABLE_BT = 1;
     BluetoothAdapter myBluetoothAdapter; //global bluetooth adapter
-    BluetoothSocket mySocket;
+    static BluetoothSocket mySocket;
     //socket that holds the BT device that is being connected to server socket
     BluetoothDevice bluetoothDevice;    //the actual BT device that is being connected
-    ConnectedThread connectedThread = null; //object of the connected thread class
+    static ConnectedThread connectedThread = null; //object of the connected thread class
     @SuppressLint("StaticFieldLeak")
     static TextView messageReceived;   //Where the value will be displayed
+    static String text;
     Button weight_button;   //fetches the value that will be displayed
     public Handler mHandler;    //allows you to send and process messages associated with Threads
 
@@ -86,11 +87,11 @@ public class InitiateBluetooth extends AppCompatActivity {
         if (myBluetoothAdapter.isEnabled()) {
             Log.d(TAG, "initiateBluetoothProcess: Attempt to connect to bluetooth module");
             //attempt to connect to bluetooth module
-            BluetoothSocket tmp = null;
             bluetoothDevice = myBluetoothAdapter.getRemoteDevice(MODULE_MAC);
             //will get the BT device using the hardware address (since it is known)
             try {
                 Log.d(TAG, "initiateBluetoothProcess: Creating a socket");
+                BluetoothSocket tmp = null;
                 tmp = bluetoothDevice.createRfcommSocketToServiceRecord(MY_UUID);
                 //will open communication with the BT device
                 mySocket = tmp;
@@ -119,17 +120,19 @@ public class InitiateBluetooth extends AppCompatActivity {
                 {
                     String txt = (String) msg.obj;
 
+                    InitiateBluetooth.text = txt;
+
                     //retrieves the data form the ConnectedThread input stream
-                    if(messageReceived.getText().toString().length() >= 30)
-                    {
-                        messageReceived.setText("");
-                        messageReceived.append(txt);
+//                    if(InitiateBluetooth.messageReceived.getText().toString().length() >= 30)
+//                    {
+//                        InitiateBluetooth.messageReceived.setText(txt);
+//                        InitiateBluetooth.messageReceived.append(txt);
                         //this is what will change / update the text view
-                    }
-                    else
-                    {
-                        messageReceived.append("\n" + txt);
-                    }
+//                    }
+//                    else
+//                    {
+//                        InitiateBluetooth.messageReceived.append("\n" + txt);
+//                    }
                 }
             }
         };
