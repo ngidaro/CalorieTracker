@@ -38,7 +38,7 @@
                 android:id="@+id/pbm_energy_goal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2500"/>
+                android:text="0"/>
 
         </LinearLayout>
 
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="100"
-        android:progress="45"
+        android:progress="0"
         android:progressDrawable="@drawable/custom_progress_energy"/>
 
     <LinearLayout
@@ -95,7 +95,7 @@
                 android:id="@+id/pbm_protein_goal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2500"/>
+                android:text="0"/>
 
         </LinearLayout>
 
@@ -116,7 +116,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="100"
-        android:progress="45"
+        android:progress="0"
         android:progressDrawable="@drawable/custom_progress_protein"/>
 
     <LinearLayout
@@ -152,7 +152,7 @@
                 android:id="@+id/pbm_carbs_goal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2500"/>
+                android:text="0"/>
 
         </LinearLayout>
 
@@ -173,7 +173,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="100"
-        android:progress="45"
+        android:progress="0"
         android:progressDrawable="@drawable/custom_progress_carbs"/>
 
     <LinearLayout
@@ -209,7 +209,7 @@
                 android:id="@+id/pbm_fat_goal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2500"/>
+                android:text="0"/>
 
         </LinearLayout>
 
@@ -230,7 +230,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="100"
-        android:progress="45"
+        android:progress="0"
         android:progressDrawable="@drawable/custom_progress_fat"/>
 
 </LinearLayout>

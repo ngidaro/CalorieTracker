@@ -44,6 +44,13 @@
             android:layout_weight="2"
             android:padding="4dp"/>
 
+        <ImageView
+            android:id="@+id/fia_weight_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_food_scale"/>
+
         <EditText
             android:id="@+id/fia_amount"
             android:hint="0"
@@ -56,7 +63,8 @@
             android:layout_gravity="top"
             android:textAlignment="center"
             android:inputType="numberSigned|numberDecimal"
-            tools:ignore="RtlCompat" />
+            tools:ignore="RtlCompat"
+            android:focusable="false"/>
 
     </LinearLayout>
 
