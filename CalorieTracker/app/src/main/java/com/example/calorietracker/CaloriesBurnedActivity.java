@@ -32,7 +32,6 @@ public class CaloriesBurnedActivity extends AppCompatActivity {
     EditText inputCalorieDeficit;
     EditText etExerciseName;
     Button addCalorieDeficit;
-    ImageView ivExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,17 +92,10 @@ public class CaloriesBurnedActivity extends AppCompatActivity {
             }
         });
 
-        ivExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     void SetupUI(){
 
-        ivExit = findViewById(R.id.cba_exit);
         etExerciseName = findViewById(R.id.cba_exercise_name);
         noteCalorieDeficit = findViewById(R.id.caldef_note);
         inputCalorieDeficit = findViewById(R.id.cal_burned);

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.calorietracker.BarcodeActivity;
+import com.example.calorietracker.CaloriesBurnedActivity;
 import com.example.calorietracker.FoodActivity;
 import com.example.calorietracker.HomeActivity;
 import com.example.calorietracker.RecipeActivity;
@@ -19,10 +20,10 @@ public class ActivityNavigator extends Activity {
     public static void changeActivity(final Context applicationContext,
                                       final String user_id,
                                       LinearLayout llHomeTab,
-                                      LinearLayout llFoodTab,
+                                      LinearLayout llExerciseTab,
                                       LinearLayout llSettingsTab,
                                       LinearLayout llRecipeTab,
-                                      FloatingActionButton fabtnScaleInput) {
+                                      FloatingActionButton fabtnFoodInput) {
 
         llHomeTab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,11 +35,11 @@ public class ActivityNavigator extends Activity {
             }
         });
 
-        llFoodTab.setOnClickListener(new View.OnClickListener() {
+        llExerciseTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(applicationContext, FoodActivity.class);
+                Intent intent = new Intent(applicationContext, CaloriesBurnedActivity.class);
                 intent.putExtra("_id", user_id);
                 v.getContext().startActivity(intent);
             }
@@ -63,10 +64,10 @@ public class ActivityNavigator extends Activity {
             }
         });
 
-        fabtnScaleInput.setOnClickListener(new View.OnClickListener() {
+        fabtnFoodInput.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(applicationContext, ScaleInputActivity.class);
+                Intent intent = new Intent(applicationContext, FoodActivity.class);
                 intent.putExtra("_id", user_id);
                 v.getContext().startActivity(intent);
             }

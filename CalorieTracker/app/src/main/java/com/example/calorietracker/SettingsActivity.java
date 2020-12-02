@@ -62,12 +62,12 @@ public class SettingsActivity extends AppCompatActivity {
         // Code to Switch Activities
 
         LinearLayout llHomeTab = findViewById(R.id.tbar_home);
-        LinearLayout llFoodTab = findViewById(R.id.tbar_food);
+        LinearLayout llExerciseTab = findViewById(R.id.tbar_exercise);
         LinearLayout llSettingsTab = findViewById(R.id.tbar_settings);
         LinearLayout llRecipeTab = findViewById(R.id.tbar_recipe);
         FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
 
-        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llSettingsTab, llRecipeTab, llFloatingButton);
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llExerciseTab, llSettingsTab, llRecipeTab, llFloatingButton);
 
         spinGender = findViewById(R.id.sa_spin_gender);
         etAge = findViewById(R.id.sa_age);

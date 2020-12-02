@@ -5,70 +5,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FoodActivity"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <ImageView
-            android:id="@+id/cba_exit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_clear_24"
-            android:layout_gravity="center"
-            tools:ignore="VectorDrawableCompat"
-            android:padding="8dp"/>
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        android:padding="16dp"
+        android:background="#89cff0"
+        android:gravity="center">
 
         <TextView
-            android:text="Calories Burned"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:textSize="32sp"
+            android:text="Add Exercise"
+            android:textSize="24dp"
+            android:textColor="#FFFFFF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="8dp"/>
+            android:layout_weight="1"
+            android:gravity="center"/>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/caldef_note"
-        android:text="Enter your total calories burned today"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"/>
-
-    <EditText
-        android:id="@+id/cba_exercise_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Exercise Name"
-        android:padding="16dp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="3">
-
-        <EditText
-            android:id="@+id/cal_burned"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:hint="Calories Burned"
-            android:inputType="number"
-            android:autofillHints="calories_burned"
-            android:layout_weight="2"
-            android:padding="16dp"/>
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="kcal"
-            android:layout_weight="1"/>
+            android:id="@+id/caldef_note"
+            android:text="Enter your total calories burned today"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"/>
 
+        <EditText
+            android:id="@+id/cba_exercise_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Exercise Name"
+            android:padding="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <EditText
+                android:id="@+id/cal_burned"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="Calories Burned"
+                android:inputType="number"
+                android:autofillHints="calories_burned"
+                android:layout_weight="2"
+                android:padding="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="kcal"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

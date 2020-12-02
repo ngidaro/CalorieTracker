@@ -77,7 +77,6 @@ public class HomeActivity extends AppCompatActivity {
     ImageView ivDateToday;
     Calendar calendar;
     SimpleDateFormat dateFormat;
-    Button btnAddBurntCalories;
 
     ProgressBar pbEnergy;
     ProgressBar pbProtein;
@@ -110,12 +109,12 @@ public class HomeActivity extends AppCompatActivity {
         // Code to Switch Activities
 
         LinearLayout llHomeTab    = findViewById(R.id.tbar_home);
-        LinearLayout llFoodTab    = findViewById(R.id.tbar_food);
+        LinearLayout llExerciseTab    = findViewById(R.id.tbar_exercise);
         LinearLayout llSettingsTab = findViewById(R.id.tbar_settings);
         LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
         FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
 
-        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llFoodTab, llSettingsTab, llRecipeTab, llFloatingButton);
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llExerciseTab, llSettingsTab, llRecipeTab, llFloatingButton);
 
         // Concat Adapter to combine foods and exercise adapters
         layoutManager = new LinearLayoutManager(this);
@@ -125,7 +124,6 @@ public class HomeActivity extends AppCompatActivity {
         tvDiaryDate = findViewById(R.id.ha_diary_date);
         ivDateBack = findViewById(R.id.ha_diary_date_back);
         ivDateForward = findViewById(R.id.ha_diary_date_forward);
-        btnAddBurntCalories = findViewById(R.id.ha_add_burnt_calories);
         ivDateToday = findViewById(R.id.ha_today);
 
         calendar = Calendar.getInstance();
@@ -157,14 +155,6 @@ public class HomeActivity extends AppCompatActivity {
 
         // Populate Page and Display the foods added by the user in a list
         getUser(user_id);
-
-        // Button to go to scale input
-        llFloatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               goToScaleInput(user_id);
-            }
-        });
 
         ivDateBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,15 +197,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        btnAddBurntCalories.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, CaloriesBurnedActivity.class);
-                intent.putExtra("_id",user_id);
-                startActivity(intent);
-            }
-        });
-
     }
 
     @Override
@@ -236,14 +217,6 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    // Takes user to scaleInput
-    protected void goToScaleInput(String user_id)
-    {
-        Intent intent = new Intent(this, ScaleInputActivity.class);
-        intent.putExtra("_id", user_id);
-        startActivity(intent);
     }
 
     // Prevents user from pressing back into the login screen
