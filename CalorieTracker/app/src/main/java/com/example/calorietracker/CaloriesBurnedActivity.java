@@ -9,11 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.example.calorietracker.navigator.ActivityNavigator;
 import com.example.calorietracker.volley.VolleyRequestContainer;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +42,16 @@ public class CaloriesBurnedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calories_burned);
 
         final String user_id = getIntent().getStringExtra("_id");
+
+        // Code to Switch Activities
+
+        LinearLayout llHomeTab    = findViewById(R.id.tbar_home);
+        LinearLayout llExerciseTab    = findViewById(R.id.tbar_exercise);
+        LinearLayout llSettingsTab = findViewById(R.id.tbar_settings);
+        LinearLayout llRecipeTab  = findViewById(R.id.tbar_recipe);
+        FloatingActionButton llFloatingButton = findViewById(R.id.floating_action_button);
+
+        ActivityNavigator.changeActivity(this, user_id, llHomeTab, llExerciseTab, llSettingsTab, llRecipeTab, llFloatingButton);
 
         SetupUI();
 

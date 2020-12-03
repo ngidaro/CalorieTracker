@@ -286,15 +286,15 @@ public class HomeActivity extends AppCompatActivity {
                             }
 
                             if (sActivityLevel.equals("Little to Non-Active"))
-                                dCalorieGoal = BMR*1.2- dWeightLossWeekly *500;
+                                dCalorieGoal = BMR*1.2- dWeightLossWeekly *1100;
                             if (sActivityLevel.equals("Lightly Active"))
-                                dCalorieGoal = BMR*1.375- dWeightLossWeekly *500;
+                                dCalorieGoal = BMR*1.375- dWeightLossWeekly *1100;
                             if (sActivityLevel.equals("Moderately Active"))
-                                dCalorieGoal = BMR*1.55- dWeightLossWeekly *500;
+                                dCalorieGoal = BMR*1.55- dWeightLossWeekly *1100;
                             if (sActivityLevel.equals("Very Active"))
-                                dCalorieGoal = BMR*1.725- dWeightLossWeekly *500;
+                                dCalorieGoal = BMR*1.725- dWeightLossWeekly *1100;
                             if (sActivityLevel.equals("Extremely Active"))
-                                dCalorieGoal = BMR*1.9- dWeightLossWeekly *500;
+                                dCalorieGoal = BMR*1.9- dWeightLossWeekly *1100;
 
                             getFoodDiary(user_id);
 

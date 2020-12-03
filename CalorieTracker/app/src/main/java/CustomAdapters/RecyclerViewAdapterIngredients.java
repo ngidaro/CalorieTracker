@@ -63,7 +63,7 @@ public class RecyclerViewAdapterIngredients extends RecyclerView.Adapter<Recycle
 //    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(customViewHolder holder, final int position) {
+    public void onBindViewHolder(final customViewHolder holder, final int position) {
 
         JSONObject foodObj = null;
 
@@ -78,14 +78,15 @@ public class RecyclerViewAdapterIngredients extends RecyclerView.Adapter<Recycle
             final JSONObject finalFoodObj = foodObj;
             holder.ivDeleteIngredient.setOnClickListener(new View.OnClickListener() {
 
+                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
                 public void onClick(View v) {
 
                     JSONObject jsonRecipe = new JSONObject();
 
-//                    mData.remove(position);
-//                    notifyItemRemoved(position);
-//                    notifyItemRangeChanged(position,mData.length());
+                    mData.remove(holder.getAdapterPosition());
+                    notifyItemRemoved(holder.getAdapterPosition());
+                    notifyItemRangeChanged(holder.getAdapterPosition(),mData.length());
 
                     try
                     {

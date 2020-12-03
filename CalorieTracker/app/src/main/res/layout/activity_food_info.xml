@@ -63,8 +63,8 @@
             android:layout_gravity="top"
             android:textAlignment="center"
             android:inputType="numberSigned|numberDecimal"
-            tools:ignore="RtlCompat"
-            android:focusable="false"/>
+            tools:ignore="RtlCompat"/>
+<!--            android:focusable="false"/>-->
 
     </LinearLayout>
 

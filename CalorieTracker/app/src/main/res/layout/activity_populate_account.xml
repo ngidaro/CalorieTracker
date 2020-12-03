@@ -96,7 +96,7 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
-            android:inputType="number"/>
+            android:inputType="numberSigned|numberDecimal"/>
 
     </LinearLayout>
 
@@ -125,7 +125,7 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
-            android:inputType="number"/>
+            android:inputType="numberSigned|numberDecimal"/>
 
     </LinearLayout>
 

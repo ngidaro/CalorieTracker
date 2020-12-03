@@ -3,6 +3,7 @@ package com.example.calorietracker.volley;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -19,9 +20,9 @@ import callbacks.IVolleyRequestCallback;
 
 public class VolleyRequestContainer {
 
-//    private static String CALORIE_TRACKER_SERVER = "http://192.168.2.55.:3333";
-//    private static String CALORIE_TRACKER_SERVER = "http://10.0.0.226:3333";
-private static String CALORIE_TRACKER_SERVER = "http://192.168.2.21:3333";
+//    private static String CALORIE_TRACKER_SERVER = "http://192.168.2.55.:3333"; // Kevin
+//    private static String CALORIE_TRACKER_SERVER = "http://10.0.0.226:3333";  // Nick
+    private static String CALORIE_TRACKER_SERVER = "http://192.168.2.21:3333"; // Nico
 
     public static void request(int method,
                                   String SERVER_URL,
@@ -47,6 +48,11 @@ private static String CALORIE_TRACKER_SERVER = "http://192.168.2.21:3333";
                         callback.onFailure(error.getMessage());
                     }
                 });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                0,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         Volley.newRequestQueue(applicationContext).add(jsonObjectRequest);
 
